@@ -46,7 +46,7 @@
   $result = mysql_query("select * from users where email = '$email' and password = '$password'") or die("Failed to query database " .mysql_error());
 
   $row = mysql_fetch_array($results);
-  if ($row['Email] == $email && $row['Password'] == $password)
+  if ($row['Email'] == $email && $row['Password'] == $password)
   {
   echo "Login successful! Welcome ".$row['Email'];
   }

@@ -54,23 +54,108 @@
         </div>
       </nav>
    
-   <div class="container table-responsive">
-     <table class="table table-bordered table-hover">
-       <tr>
-         <th>Room #</th>
-         <th>People</th>
-       </tr>
-       <tr>
-         <td>Hello</td>
-         <td>World</td>
-       </tr>
 
-       <tr>
-        <td>Sam</td>
-        <td>Applehead</td>
-     </table>
+   <div class="container">
 
-   </div>
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#orroom" aria-controls="home" role="tab" data-toggle="tab">OR Room</a></li>
+        <li role="presentation"><a href="#attending" aria-controls="profile" role="tab" data-toggle="tab">Attending</a></li>
+        <li role="presentation"><a href="#crna" aria-controls="messages" role="tab" data-toggle="tab">CRNA</a></li>
+        <li role="presentation"><a href="#resident" aria-controls="resident" role="tab" data-toggle="tab">Resident</a></li>
+        <li role="presentation"><a href="#tech" aria-controls="settings" role="tab" data-toggle="tab">Tech</a></li>
+        <li role="presentation"><a href="#services" aria-controls="settings" role="tab" data-toggle="tab">Services</a></li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="orroom">
+        <br />
+          <div class="container">
+            <table id="mainORTable" class="table table-bordered">
+              <tr>
+                <th>OR Room #</th>
+                <th>Attending</th>
+                <th>CRNA</th>
+                <th>Resident</th>
+                <th>Tech</th>
+              </tr>
+
+              <tr>
+              <td>blah</td>
+              <td>bah 2</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="attending">
+            <br />
+            <div class="container">
+              <table id="attendingTable" class="table table-bordered">
+                <tr>
+                <th>Role</th>
+                <th>Attending</th>
+                <th>Locations</th>
+                <th>Next</th>
+                <th>Comments</th>
+                <th>Breaks</th>
+                </tr>
+              </table>
+            </div>
+          </div>
+       
+        <div role="tabpanel" class="tab-pane" id="crna">
+          <br />
+            <div class="container">
+              <table id="crnaTable" class="table table-bordered">
+                <tr>
+                <th>Role</th>
+                <th>CRNA</th>
+                <th>Locations</th>
+                <th>Next</th>
+                <th>Comments</th>
+                <th>Breaks</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="resident">
+          <br />
+            <div class="container">
+              <table id="residentTable" class="table table-bordered">
+                <tr>
+                <th>Role</th>
+                <th>Resident</th>
+                <th>Locations</th>
+                <th>Next</th>
+                <th>Comments</th>
+                <th>Breaks</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane" id="tech">
+          <br />
+            <div class="container">
+              <table id="techTable" class="table table-bordered">
+                <tr>
+                <th>Role</th>
+                <th>Tech</th>
+                <th>Locations</th>
+                <th>Next</th>
+                <th>Comments</th>
+                <th>Breaks</th>
+                </tr>
+              </table>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="services">Balh</div>
+      </div>
+
+</div>
 
 
     <footer class="footer">

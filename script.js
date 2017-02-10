@@ -31,6 +31,14 @@ var data =
     "actions": "Not sure where this field should go yet",
     "status": "Denied",
     "timestamp": "2017-01-30 21:33:07"
+  },
+  {
+    "first_name": "Kush",
+    "last_name": "Patel",
+    "type": "Break",
+    "actions": "Not sure where this field should go yet",
+    "status": "Approved",
+    "timestamp": "2017-01-30 22:50:07"
   }
 ]
 
