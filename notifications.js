@@ -17,6 +17,10 @@ Database Structure for System Activities JSON File
     (low, medium high)
 
 */
+
+var USER = "CURRENT_ADMIN";
+var IS_ADMIN = false;
+
 var testJson =
 [
   {
@@ -70,58 +74,6 @@ var testJson =
     "starttime": "null",
     "endtime": "null",
     "priority": "null"
-  },
-  {
-    "sender": "Bill",
-    "receiver": "Dr. Rajan",
-    "type": "MeetingRequest",
-    "freetext": "I have to meet with residents for training",
-    "status": "pending",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "null",
-    "location": "East Building",
-    "starttime": "1:00pm",
-    "endtime": "1:30pm",
-    "priority": "medium"
-  },
-  {
-    "sender": "Bill",
-    "receiver": "Dr. Rajan",
-    "type": "MeetingRequest",
-    "freetext": "I have to meet with residents for training",
-    "status": "approved",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "null",
-    "location": "East Building",
-    "starttime": "1:00pm",
-    "endtime": "1:30pm",
-    "priority": "medium"
-  },
-  {
-    "sender": "Bill",
-    "receiver": "Dr. Rajan",
-    "type": "MeetingRequest",
-    "freetext": "I have to meet with residents for training",
-    "status": "denied",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "null",
-    "location": "East Building",
-    "starttime": "1:00pm",
-    "endtime": "1:30pm",
-    "priority": "medium"
-  },
-  {
-    "sender": "Dr. Rajan",
-    "receiver": "Bill",
-    "type": "MeetingApproved",
-    "freetext": "I have to meet with residents for training",
-    "status": "denied",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "null",
-    "location": "East Building",
-    "starttime": "1:00pm",
-    "endtime": "1:30pm",
-    "priority": "medium"
   }
 ]
 // ----OBJECT LIBRARY -----
@@ -140,7 +92,7 @@ function Announcement (sender, freetext, timeStamp) {
     return this.freetext;
   };
   this.getDescription = function () {
-    return "announcement written by " + this.sender;
+    return "Announcement written by " + this.sender;
   };
 }
 
@@ -286,8 +238,7 @@ function appendAnnouncement (announcement, index) {
         '<p class="subject"><a href="#description-' + index + '" data-toggle="collapse">' + header + '</a></p>'+
 
         '<div id="description-'+ index + '" class="description collapse">'+
-          '<p>Details of the notification here'+
-          '</br></br></br>' + description +
+          '<p>' + description +
           '</p>'+
         '</div>'+
         '<p class="timeStamp">' + timeStamp + '</p>'+
@@ -316,9 +267,7 @@ function appendTaskAssignment(taskAssignment, index) {
             '<p class="timeStamp">' + timeStamp + '</p>'+
         '</div>'+
         '<div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">'+
-          '<button type="button" class="btn btn-outline-success btn-sm">'+
-            '<span class="glyphicon glyphicon-unchecked"></span>'+
-          '</button>'+
+          '<span class="glyphicon glyphicon-unchecked"></span>'+
         '</div>'+
 
       '</div>'
@@ -472,7 +421,8 @@ function appendMeetingApproved(meetingApproved, index) {
 }
 
 
-// Input string version of JSON, updates page with notifications
+// --------------- DIRECT JSON to DISPLAY------------------
+/*
 function updateFeed(jsonStr) {
   var index = 0;
   for (i = 0; i < jsonStr.length; i++) {
@@ -509,11 +459,93 @@ function updateFeed(jsonStr) {
       alert("JSON object index " + i + "is not valid. Must be [Announcement, TaskAssignment, TaskCompleted, MeetingRequest, MeetingApproved, Break] ");
     }
   }
+}
+*/
 
+//-------- JSON to ARRAY to DISPLAY --------------
+
+function buildNotifications(jsonStr) {
+  var notificationsArray = [];
+
+  for (i = 0; i < jsonStr.length; i++) {
+    var current = jsonStr[i];
+    if (current.type === "Announcement") {
+      notificationsArray[i] = new Announcement(current.sender, current.freetext, current.timestamp);
+    }
+    else if (current.type === "TaskAssignment") {
+      notificationsArray[i] = new TaskAssignment (current.sender, current.status, current.timestamp, current.ornumber);
+    }
+    else if (current.type === "TaskCompleted") {
+      notificationsArray[i]  = new TaskCompleted(current.sender, current.timestamp, current.ornumber, current.assigner);
+    }
+    else if (current.type === "MeetingRequest") {
+      notificationsArray[i] = new MeetingRequest(current.sender, current.freetext, current.status, current.timestamp, current.location, current.starttime, current.endtime, current.priority);
+    }
+    else if (current.type === "MeetingApproved") {
+      notificationsArray[i] = new MeetingApproved(current.sender, current.freetext, current.timestamp, current.location, current.starttime, current.endtime, current.priority);
+    }
+    else if (current.type === "Break") {
+
+    }
+    else {
+      alert("JSON object index " + i + "is not valid. Must be [Announcement, TaskAssignment, TaskCompleted, MeetingRequest, MeetingApproved, Break] ");
+    }
+  }
+
+  return notificationsArray;
 }
 
+function displayNotifications(masterArray) {
+  var index = 0;
+  for (i = 0; i < masterArray.length; i++) {
+    var current = masterArray[i];
+    if (current instanceof Announcement) {
+      appendAnnouncement(current, index);
+      index++;
+    }
+    else if (current instanceof TaskAssignment) {
+      appendTaskAssignment(current, index);
+      index++;
+    }
+    else if (current instanceof TaskCompleted) {
+      appendTaskCompleted(current, index);
+      index++;
+    }
+    else if (current instanceof MeetingRequest) {
+      appendMeetingRequest(current, index);
+      index++;
+    }
+    else if (current instanceof MeetingApproved) {
+      appendMeetingApproved(current, index);
+      index++;
+    }
+    else if (current instanceof Break) {
+
+    }
+    else {
+      alert("JSON object index " + i + "is not valid. Must be [Announcement, TaskAssignment, TaskCompleted, MeetingRequest, MeetingApproved, Break] ");
+    }
+  }
+}
+
+function createAnnouncement(){}
+
 $(document).ready(function() {
-  updateFeed(testJson);
+  var index = 0;
+  var notificationsArray = buildNotifications(testJson);
+
+  $("#postBtn").click(function () {
+    var date = new Date();
+    var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
+    var freeText = $("#announcement").val()
+    appendAnnouncement(new Announcement(USER, freeText, timeStamp));
+  });
+
+  displayNotifications(notificationsArray);
+
+
+
+
 });
 
 

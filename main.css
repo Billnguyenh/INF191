@@ -3,7 +3,7 @@ html {
 	min-height: 100%;
 }
 body {
-	margin-bottom: 60px; 
+	margin-bottom: 60px;
 }
 .footer {
 	position: absolute;
@@ -17,8 +17,9 @@ body {
 	margin: 20px 0;
 }
 
-.announce .glyphicon {
-  font-size: 2.5em;
+.announceFeed .glyphicon,
+.postAnnounce .glyphicon {
+  font-size: 2em;
 }
 
 .glyphicon-ok {
@@ -41,10 +42,8 @@ body {
 .description {
   padding: 10px 5px;
   margin: 10px 0px;
-  text-align: center;
+  text-align: left;
 
-  border: thick solid #e3e3e3;;
-  border-color: ;
 }
 .subject a {
   font-size: 1em;
