@@ -4,7 +4,7 @@
    <meta charset="utf-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1">
- 
+
    <link rel="icon" href="favicon.ico">
 
    <title>OR-Orchestrator</title>
@@ -12,8 +12,9 @@
    <!-- Bootstrap core CSS -->
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
-
    <link rel="stylesheet" type="text/css" href="main.css">
+   <script src="jquery-3.1.1.min.js"></script>
+   <script src="notifications.js"></script>
 
    <!-- Custom styles for this template -->
 
@@ -25,167 +26,56 @@
  </head>
 
  <body>
-     <nav class="navbar navbar-inverse navbar-static-top">
-        <div class="container">
-          <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-            <a class="navbar-brand" href="#">Medular</a>
-          </div>
+   <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+          <a class="navbar-brand" href="#">Medular</a>
+        </div>
 
-          <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-              <li class="active"><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
-              <li><a href="orchestrator.html"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
-              <li><a href="history.html"><span class="glyphicon glyphicon-time"></span> History</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-              </ul>
-            
-            <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Sam Applebaum</p>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
+            <li class="active"><a href="orchestrator.html"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>
+            <li><a href="history.html"><span class="glyphicon glyphicon-time"></span> History</a></li>
+            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+            </ul>
 
-          </div>
-
+          <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Sam Applebaum</p>
 
         </div>
-      </nav>
-      
-    <div class="announce container">
 
-    <!-- Post Announcement Bar -->
-    <div class="row well well-lg">
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-bullhorn"></span>
+
       </div>
-      <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
-          <div class="input-group input-group-sm">
-            <input type="text" class="form-control" placeholder="Write an Announcement">
-            <span class="input-group-btn">
-              <button class="btn btn">Post</buton>
-            </span>
-          </div>
+    </nav>
+
+    <div class="postAnnounce container">
+
+      <!-- Post Announcement Bar -->
+      <div class="row well well-lg">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          <span class="glyphicon glyphicon-bullhorn"></span>
+        </div>
+        <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
+            <div class="input-group input-group-sm">
+              <input type="text" class="form-control" placeholder="Write an Announcement">
+              <span class="input-group-btn">
+                <button id="postBtn" class="btn btn">Post</buton>
+              </span>
+            </div>
+        </div>
       </div>
     </div>
 
-    <!-- Individual Notifications
-    List of Non-bootstrap classes created by author
-
-  1) class="subject" which is hyperlink
-     class="timestamp" which is the time stamp under
-
-  2) class="description" refers to everything that is hidden before expanding
-                          notifiction (detailed description of notification)
-
-  3) class="notification" refers to each item in the newsfeed excluding the
-                            announcements post bar. Encapsulates headline
-                            and description (e.g. Shift Swap Request)
-    -->
-
-
-    <!-- Shift Swap Request-->
-    <div class="row well notification">
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-user"></span>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-        <p class="subject"><a href="#description-1" data-toggle="collapse">Dr. Ned Flanders requests to switch shifts on 11/31/2016</a></p>
-        <div id="description-1" class="description collapse">
-          <p>Details of the notification here
-            </br></br></br>
-          </p>
-        </div>
-        <p class="timeStamp">10/17/16 9:02am</p>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-ok"></span>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-remove"></span>
-      </div>
+    <div class="announceFeed container">
+      <!-- Dynamically Updating -->
     </div>
-
-    <!-- Task Assignment Request -->
-    <div class="row well notification">
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-sort"></span>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-        <p class="subject"><a href="#description-2" data-toggle="collapse">Dr. Rajan has assigned you to OR2</a></p>
-        <div id="description-2" class="description collapse">
-          <p>Details of the notification here
-            </br></br></br>
-          </p>
-        </div>
-        <p class="timeStamp">10/16/16 6:52pm</p>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-ok"></span>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-remove"></span>
-      </div>
-    </div>
-
-    <!-- Announcement -->
-    <div class="row well notification">
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-bullhorn"></span>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-
-        <p class="subject"><a href="#description-3" data-toggle="collapse">Remember to resubmit your online HIPAA training - Dr. Rajan</a></p>
-
-        <div id="description-3" class="description collapse">
-          <p>Details of the notification here
-          </br></br></br> Message written by Dr Rajan.
-          </p>
-        </div>
-        <p class="timeStamp">10/17/16 7:22am</p>
-      </div>
-    </div>
-    <!-- Meeting Requests -->
-    <div class="row well notification">
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-calendar"></span>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-        <p class="subject"><a href="#description-4" data-toggle="collapse">Resident Jacob Myers has requested to attend a meeting at 2pm</a></p>
-        <div id="description-4" class="description collapse">
-          <p>Details of the notification here
-            </br></br></br>
-          </p>
-        </div>
-        <p class="timeStamp">10/17/16 7:22am</p>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-ok"></span>
-      </div>
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-remove"></span>
-      </div>
-    </div>
-
-    <!-- Task Near Completion -->
-    <div class="row well notification">
-      <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-        <span class="glyphicon glyphicon-bell"></span>
-      </div>
-      <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">
-        <p class="subject"><a href="#description-5" data-toggle="collapse">Dr. Ned Flanders is 10 minutes away from task completion</a></p>
-        <div id="description-5" class="description collapse">
-          <p>Dr. Ned Flanders does not have a next task.
-          </br></br></br> It is recommended to assign him a task
-          </p>
-        </div>
-        <p class="timeStamp">10/17/16 7:22am</p>
-      </div>
-    </div>
-
-  </div>
 
 
     <footer class="footer">
@@ -196,6 +86,6 @@
 
      <!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    
+
  </body>
  </html>
