@@ -98,6 +98,7 @@ function getByTime(date){
         var startTime = new Date(Date.parse(el.start_time.replace('-', '/', 'g')));
         var endTime = new Date(Date.parse(el.end_time.replace('-', '/', 'g')));
          if(startTime <= now && now <= endTime) {
+            el['name'] = el.first_name + " " + el.last_name;
             return el;
          }
     });
