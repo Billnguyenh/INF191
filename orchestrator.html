@@ -91,6 +91,7 @@
             <thead>
                     <tr>
                         <th data-field="location">OR Room #</th>
+                        <th data-field="position">Position</th>
                         <th data-field="first_name">First Name</th>
                         <th data-field="last_name">Last Name</th>
                         <th data-field="start_time">Start Time</th>
@@ -107,67 +108,112 @@
         <div role="tabpanel" class="tab-pane" id="attending">
             <br />
             <div class="container">
-              <table id="attendingTable" class="table table-bordered">
-                <tr>
-                <th>Role</th>
-                <th>Attending</th>
-                <th>Locations</th>
-                <th>Next</th>
-                <th>Comments</th>
-                <th>Breaks</th>
-                </tr>
-              </table>
+            <table 
+              id = "attendingTable"
+               data-toggle="attendingTable"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true">
+
+
+                <thead>
+                        <tr>
+                           <th >Role</th>
+                            <th data-field="first_name">Attending</th>
+                            <th data-field="location">Locations</th>
+                            <th>Next</th>
+                            <th>Comments</th>
+                            <th>Breaks</th>
+                        </tr>
+                    </thead>
+
+            </table>
+              <br>
             </div>
           </div>
        
         <div role="tabpanel" class="tab-pane" id="crna">
           <br />
             <div class="container">
-              <table id="crnaTable" class="table table-bordered">
-                <tr>
-                <th>Role</th>
-                <th>CRNA</th>
-                <th>Locations</th>
-                <th>Next</th>
-                <th>Comments</th>
-                <th>Breaks</th>
-                </tr>
-              </table>
+            <table 
+              id = "crnaTable"
+               data-toggle="crnaTable"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true">
+
+
+                <thead>
+                        <tr>
+                           <th >Role</th>
+                            <th data-field="first_name">CRNA</th>
+                            <th data-field="location">Locations</th>
+                            <th>Next</th>
+                            <th>Comments</th>
+                            <th>Breaks</th>
+                        </tr>
+                    </thead>
+
+            </table>
+              <br>
+    
             </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="resident">
           <br />
             <div class="container">
-              <table id="residentTable" class="table table-bordered">
-                <tr>
-                <th>Role</th>
-                <th>Resident</th>
-                <th>Locations</th>
-                <th>Next</th>
-                <th>Comments</th>
-                <th>Breaks</th>
-                </tr>
-              </table>
+             <table 
+              id = "residentTable"
+               data-toggle="residentTable"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true">
+
+
+                <thead>
+                        <tr>
+                           <th >Role</th>
+                            <th data-field="first_name">Resident</th>
+                            <th data-field="location">Locations</th>
+                            <th>Next</th>
+                            <th>Comments</th>
+                            <th>Breaks</th>
+                        </tr>
+                    </thead>
+
+            </table>
+              <br>
             </div>
         </div>
 
         <div role="tabpanel" class="tab-pane" id="tech">
           <br />
             <div class="container">
-              <table id="techTable" class="table table-bordered">
-                <tr>
-                <th>Role</th>
-                <th>Tech</th>
-                <th>Locations</th>
-                <th>Next</th>
-                <th>Comments</th>
-                <th>Breaks</th>
-                </tr>
-              </table>
+              <table 
+              id = "techTable"
+               data-toggle="techTable"
+               data-search="true"
+               data-show-refresh="true"
+               data-show-toggle="true">
+
+
+                <thead>
+                        <tr>
+                           <th >Role</th>
+                            <th data-field="first_name">Tech</th>
+                            <th data-field="location">Locations</th>
+                            <th>Next</th>
+                            <th>Comments</th>
+                            <th>Breaks</th>
+                        </tr>
+                    </thead>
+
+            </table>
+              <br>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="services">Balh</div>
+        <div role="tabpanel" class="tab-pane" id="services"></div>
       </div>
 
 </div>
