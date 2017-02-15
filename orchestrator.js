@@ -152,26 +152,24 @@ function destroyTables(){
 }
 
 function getPrev() {
-    console.log("Prev button was clicked");
-    var newDate = new Date(now.valueOf());
-    newDate.setHours(now.getHours() - 1);
-    timeText = newDate.getHours() + ":00" +" - " + (newDate.getHours()+ 1) + ":00";
+    now = new Date(now.valueOf());
+    now.setHours(now.getHours() - 1);
+    timeText = now.getHours() + ":00" +" - " + (now.getHours()+ 1) + ":00";
     $('#time').text(timeText);
-    console.log(newDate);
     destroyTables();
-    var prevData = getByTime(newDate);
+    var prevData = getByTime(now);
     setTableData(prevData);
 }
 
 function getNext() {
     console.log("Next button was clicked");
-    var newDate = new Date(now.valueOf());
-    newDate.setHours(now.getHours() + 1);
-    timeText = newDate.getHours() + ":00" +" - " + (newDate.getHours()+ 1) + ":00";
+    now = new Date(now.valueOf());
+    now.setHours(now.getHours() + 1);
+    timeText = now.getHours() + ":00" +" - " + (now.getHours()+ 1) + ":00";
     $('#time').text(timeText);
-    console.log(newDate);
     destroyTables();
-    var nextData = getByTime(newDate);
+    console.log(now);
+    var nextData = getByTime(now);
     setTableData(nextData);
 
 }
