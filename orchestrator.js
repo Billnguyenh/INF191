@@ -6,8 +6,8 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 20:00:00",
-    "end_time": "2017-02-14 22:00:00"
+    "start_time": "2017-02-15 13:00:00",
+    "end_time": "2017-02-15 15:00:00"
   },
   {
     "first_name": "Sam",
@@ -16,8 +16,8 @@ var orchestratorData = [
     "location": "OR102",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 22:00:00",
-    "end_time": "2017-02-14 24:00:00"
+    "start_time": "2017-02-15 12:00:00",
+    "end_time": "2017-02-15 14:00:00"
   },
   {
     "first_name": "Jane",
@@ -26,8 +26,8 @@ var orchestratorData = [
     "location": "OR104",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 20:00:00",
-    "end_time": "2017-02-14 22:00:00"
+    "start_time": "2017-02-15 13:00:00",
+    "end_time": "2017-02-15 15:00:00"
   },
   {
     "first_name": "Janay",
@@ -36,8 +36,8 @@ var orchestratorData = [
     "location": "OR102",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 18:00:00",
-    "end_time": "2017-02-14 20:00:00"
+    "start_time": "2017-02-15 18:00:00",
+    "end_time": "2017-02-15 20:00:00"
   },
   {
     "first_name": "Janay",
@@ -46,8 +46,8 @@ var orchestratorData = [
     "location": "OR103",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 16:00:00",
-    "end_time": "2017-02-14 18:00:00"
+    "start_time": "2017-02-15 16:00:00",
+    "end_time": "2017-02-15 18:00:00"
   },
   {
     "first_name": "Janay",
@@ -56,8 +56,8 @@ var orchestratorData = [
     "location": "OR104",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 11:00:00",
-    "end_time": "2017-02-14 13:00:00"
+    "start_time": "2017-02-15 11:00:00",
+    "end_time": "2017-02-15 13:00:00"
   },
   {
     "first_name": "Sam",
@@ -66,8 +66,8 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 15:00:00",
-    "end_time": "2017-02-14 17:00:00"
+    "start_time": "2017-02-15 15:00:00",
+    "end_time": "2017-02-15 17:00:00"
   },
   {
     "first_name": "Jane",
@@ -76,8 +76,8 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-14 16:00:00",
-    "end_time": "2017-02-14 18:00:00"
+    "start_time": "2017-02-15 16:00:00",
+    "end_time": "2017-02-15 18:00:00"
   }
 ];
 var now = new Date(Date.now());
@@ -162,7 +162,6 @@ function getPrev() {
 }
 
 function getNext() {
-    console.log("Next button was clicked");
     now = new Date(now.valueOf());
     now.setHours(now.getHours() + 1);
     timeText = now.getHours() + ":00" +" - " + (now.getHours()+ 1) + ":00";
