@@ -10,6 +10,16 @@ var orchestratorData = [
     "end_time": "2017-02-15 15:00:00"
   },
   {
+    "first_name": "Chris",
+    "last_name": "Ries",
+    "position": "CRNA",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 12:20:00",
+    "end_time": "2017-02-15 13:22:00"
+  },
+  {
     "first_name": "Sam",
     "last_name": "Applebaum",
     "position": "CRNA",
@@ -28,6 +38,16 @@ var orchestratorData = [
     "priority": "NULL",
     "start_time": "2017-02-15 13:00:00",
     "end_time": "2017-02-15 15:00:00"
+  },
+  {
+    "first_name": "Kush",
+    "last_name": "Patel",
+    "position": "CRNA",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 13:20:00",
+    "end_time": "2017-02-15 17:22:00"
   },
   {
     "first_name": "Janay",
@@ -78,6 +98,86 @@ var orchestratorData = [
     "priority": "NULL",
     "start_time": "2017-02-15 16:00:00",
     "end_time": "2017-02-15 18:00:00"
+  },
+  {
+    "first_name": "Kush",
+    "last_name": "Patel",
+    "position": "Attending",
+    "location": "OR105",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 02:00:00",
+    "end_time": "2017-02-15 08:00:00"
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Applebaum",
+    "position": "Resident",
+    "location": "OR105",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 02:00:00",
+    "end_time": "2017-02-15 08:00:00"
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Nunez",
+    "position": "CRNA",
+    "location": "OR106",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 02:00:00",
+    "end_time": "2017-02-15 13:00:00"
+  },
+  {
+    "first_name": "Bill",
+    "last_name": "Nunez",
+    "position": "Resident",
+    "location": "OR107",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 11:30:00",
+    "end_time": "2017-02-15 13:00:00"
+  },
+  {
+    "first_name": "Chris",
+    "last_name": "Ries",
+    "position": "CRNA",
+    "location": "OR107",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 11:30:00",
+    "end_time": "2017-02-15 13:00:00"
+  },
+  {
+    "first_name": "Janay",
+    "last_name": "Nunez",
+    "position": "Attending",
+    "location": "OR102",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 04:20:00",
+    "end_time": "2017-02-15 05:00:00"
+  },
+  {
+    "first_name": "Kush",
+    "last_name": "Patel",
+    "position": "CRNA",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 10:20:00",
+    "end_time": "2017-02-15 17:22:00"
+  },
+  {
+    "first_name": "Bill",
+    "last_name": "Nguyen",
+    "position": "CRNA",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-15 11:20:00",
+    "end_time": "2017-02-15 16:22:00"
   }
 ];
 var now = new Date(Date.now());
