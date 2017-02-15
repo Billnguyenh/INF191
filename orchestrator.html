@@ -9,8 +9,8 @@
    <title>OR-Orchestrator</title>
 
    <!-- Bootstrap core CSS -->
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
 
    <link rel="stylesheet" type="text/css" href="main.css">
 
@@ -57,8 +57,12 @@
         </div>
       </nav>
    
-   <div class="container" id="time">
-     
+   <div class="container">
+    <div class="row">
+      <button type="button" class="col-md-2 btn btn-primary" onclick="getPrev()">Prev</button>
+      <h2 id="time" class="col-md-8 text-center"></h2>
+      <button type="button" class="col-md-2 btn btn-primary" onclick="getNext()">Next</button>
+    </div>
    </div>
 
    <div class="container">
@@ -226,14 +230,11 @@
     </footer>
 
      <!-- Bootstrap core JavaScript
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-<script type="text/javascript" src="orchestrator.js"></script>
+    <script type="text/javascript" src="orchestrator.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
-
-
-
 
     <script src="../src/bootstrap-table-filter.js"></script>
 

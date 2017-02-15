@@ -6,8 +6,8 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 20:00:00",
-    "end_time": "2017-02-13 22:00:00"
+    "start_time": "2017-02-14 20:00:00",
+    "end_time": "2017-02-14 22:00:00"
   },
   {
     "first_name": "Sam",
@@ -16,8 +16,8 @@ var orchestratorData = [
     "location": "OR102",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 22:00:00",
-    "end_time": "2017-02-13 24:00:00"
+    "start_time": "2017-02-14 22:00:00",
+    "end_time": "2017-02-14 24:00:00"
   },
   {
     "first_name": "Jane",
@@ -26,8 +26,8 @@ var orchestratorData = [
     "location": "OR104",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 20:00:00",
-    "end_time": "2017-02-13 22:00:00"
+    "start_time": "2017-02-14 20:00:00",
+    "end_time": "2017-02-14 22:00:00"
   },
   {
     "first_name": "Janay",
@@ -36,8 +36,8 @@ var orchestratorData = [
     "location": "OR102",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 18:00:00",
-    "end_time": "2017-02-13 20:00:00"
+    "start_time": "2017-02-14 18:00:00",
+    "end_time": "2017-02-14 20:00:00"
   },
   {
     "first_name": "Janay",
@@ -46,8 +46,8 @@ var orchestratorData = [
     "location": "OR103",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 16:00:00",
-    "end_time": "2017-02-13 18:00:00"
+    "start_time": "2017-02-14 16:00:00",
+    "end_time": "2017-02-14 18:00:00"
   },
   {
     "first_name": "Janay",
@@ -56,8 +56,8 @@ var orchestratorData = [
     "location": "OR104",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 11:00:00",
-    "end_time": "2017-02-13 13:00:00"
+    "start_time": "2017-02-14 11:00:00",
+    "end_time": "2017-02-14 13:00:00"
   },
   {
     "first_name": "Sam",
@@ -66,8 +66,8 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 16:00:00",
-    "end_time": "2017-02-13 18:00:00"
+    "start_time": "2017-02-14 15:00:00",
+    "end_time": "2017-02-14 17:00:00"
   },
   {
     "first_name": "Jane",
@@ -76,14 +76,13 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-13 16:00:00",
-    "end_time": "2017-02-13 18:00:00"
+    "start_time": "2017-02-14 16:00:00",
+    "end_time": "2017-02-14 18:00:00"
   }
 ];
 var now = new Date(Date.now());
 
-var timeText = document.createElement("h2");
-timeText.innerHTML = "Current Time: " + now.getHours() + ":" + now.getMinutes() +":" + now.getSeconds();
+var timeText = now.getHours() + ":00" +" - " + (now.getHours()+ 1) + ":00";
 $('#time').append(timeText);
 
 var filteredbyDateData;
@@ -97,7 +96,7 @@ function getByTime(date){
     return orchestratorData.filter(function(el) {
         var startTime = new Date(Date.parse(el.start_time.replace('-', '/', 'g')));
         var endTime = new Date(Date.parse(el.end_time.replace('-', '/', 'g')));
-         if(startTime <= now && now <= endTime) {
+         if(startTime <= date && date <= endTime) {
             el['name'] = el.first_name + " " + el.last_name;
             return el;
          }
@@ -106,33 +105,29 @@ function getByTime(date){
 
 filteredbyDateData = getByTime(now);
 
-attendingTableData = filteredbyDateData.filter(function(data) {
-    if(data.position === "Attending"){
-        return data;
-    }
-});
 
-crnaTableData = filteredbyDateData.filter(function(data) {
-    if(data.position === "CRNA"){
-        return data;
-    }
-});
+function setTableData(tableData) {
+    attendingTableData = tableData.filter(function(data) {
+        if(data.position === "Attending"){
+            return data;
+        } });
 
-residentTableData = filteredbyDateData.filter(function(data) {
-    if(data.position === "Resident"){
-        return data;
-    }
-});
+    crnaTableData = tableData.filter(function(data) {
+        if(data.position === "CRNA"){
+            return data;
+        }});
+    residentTableData = tableData.filter(function(data) {
+        if(data.position === "Resident"){
+            return data;
+        }});
 
-techTableData = filteredbyDateData.filter(function(data) {
-    if(data.position === "Tech"){
-        return data;
-    }
-});
-
-$(function () {
+    techTableData = tableData.filter(function(data) {
+        if(data.position === "Tech"){
+            return data;
+        }});
+    
     $('#mainORTable').bootstrapTable({
-        data: filteredbyDateData
+        data: tableData
     });
     $('#attendingTable').bootstrapTable({
         data: attendingTableData
@@ -146,4 +141,41 @@ $(function () {
     $('#techTable').bootstrapTable({
         data: techTableData
     });
+}
+
+function destroyTables(){
+    $('#mainORTable').bootstrapTable("destroy");
+    $('#attendingTable').bootstrapTable("destroy");
+    $('#crnaTable').bootstrapTable("destroy");
+    $('#residentTable').bootstrapTable("destroy");
+    $('#techTable').bootstrapTable("destroy");
+}
+
+function getPrev() {
+    console.log("Prev button was clicked");
+    var newDate = new Date(now.valueOf());
+    newDate.setHours(now.getHours() - 1);
+    timeText = newDate.getHours() + ":00" +" - " + (newDate.getHours()+ 1) + ":00";
+    $('#time').text(timeText);
+    console.log(newDate);
+    destroyTables();
+    var prevData = getByTime(newDate);
+    setTableData(prevData);
+}
+
+function getNext() {
+    console.log("Next button was clicked");
+    var newDate = new Date(now.valueOf());
+    newDate.setHours(now.getHours() + 1);
+    timeText = newDate.getHours() + ":00" +" - " + (newDate.getHours()+ 1) + ":00";
+    $('#time').text(timeText);
+    console.log(newDate);
+    destroyTables();
+    var nextData = getByTime(newDate);
+    setTableData(nextData);
+
+}
+
+$(function () {
+   setTableData(filteredbyDateData);
 });
