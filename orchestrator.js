@@ -6,18 +6,18 @@ var orchestratorData = [
     "location": "OR101",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-15 13:00:00",
-    "end_time": "2017-02-15 15:00:00"
+    "start_time": "2017-02-15 10:00:00",
+    "end_time": "2017-02-15 12:00:00"
   },
   {
     "first_name": "Chris",
     "last_name": "Ries",
     "position": "CRNA",
-    "location": "OR104",
+    "location": "OR105",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-15 12:20:00",
-    "end_time": "2017-02-15 13:22:00"
+    "start_time": "2017-02-15 10:00:00",
+    "end_time": "2017-02-15 12:00:00"
   },
   {
     "first_name": "Sam",
@@ -36,18 +36,18 @@ var orchestratorData = [
     "location": "OR104",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-15 13:00:00",
-    "end_time": "2017-02-15 15:00:00"
+    "start_time": "2017-02-15 12:00:00",
+    "end_time": "2017-02-15 14:00:00"
   },
   {
-    "first_name": "Kush",
-    "last_name": "Patel",
-    "position": "CRNA",
-    "location": "OR104",
+    "first_name": "Indy",
+    "last_name": "Jones",
+    "position": "Tech",
+    "location": "OR107",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-15 13:20:00",
-    "end_time": "2017-02-15 17:22:00"
+    "start_time": "2017-02-15 11:00:00",
+    "end_time": "2017-02-15 13:00:00"
   },
   {
     "first_name": "Janay",
@@ -126,8 +126,8 @@ var orchestratorData = [
     "location": "OR106",
     "type": "NULL",
     "priority": "NULL",
-    "start_time": "2017-02-15 02:00:00",
-    "end_time": "2017-02-15 13:00:00"
+    "start_time": "2017-02-15 09:00:00",
+    "end_time": "2017-02-15 11:00:00"
   },
   {
     "first_name": "Bill",
@@ -162,7 +162,7 @@ var orchestratorData = [
   {
     "first_name": "Kush",
     "last_name": "Patel",
-    "position": "CRNA",
+    "position": "Tech",
     "location": "OR104",
     "type": "NULL",
     "priority": "NULL",
@@ -180,12 +180,15 @@ var orchestratorData = [
     "end_time": "2017-02-15 16:22:00"
   }
 ];
+//Database call here to get data and save as var orchestratorData = ...
+
 var now = new Date(Date.now());
 
 var timeText = now.getHours() + ":00" +" - " + (now.getHours()+ 1) + ":00";
 $('#time').append(timeText);
 
 var filteredbyDateData;
+var mainORTableData;
 var attendingTableData;
 var crnaTableData;
 var residentTableData;
@@ -207,6 +210,74 @@ filteredbyDateData = getByTime(now);
 
 
 function setTableData(tableData) {
+    var tempobjs = [], obj;
+    var locationCheckBool = false;
+    for (var i = tableData.length - 1; i >= 0; i--) {
+        if (tempobjs.length === 0) {
+            obj = {location: tableData[i].location};
+            switch(tableData[i].position){
+                case "Attending":
+                    obj.attending = tableData[i].name;
+                    break;
+                case "CRNA":
+                    obj.crna = tableData[i].name;
+                    break;
+                case "Resident":
+                    obj.resident = tableData[i].name;
+                    break;
+                case "Tech":
+                    obj.tech = tableData[i].name;
+                    break;
+            }
+            tempobjs.push(obj);
+        } else {
+            for (var t = tempobjs.length - 1; t >= 0; t--) {
+                if(tempobjs[t].location === tableData[i].location){
+                    locationCheckBool = true;
+                    switch(tableData[i].position){
+                        case "Attending":
+                            tempobjs[t].attending = tableData[i].name;
+                            break;
+                        case "CRNA":
+                            tempobjs[t].crna = tableData[i].name;
+                            break;
+                        case "Resident":
+                            tempobjs[t].resident = tableData[i].name;
+                            break;
+                        case "Tech":
+                            tempobjs[t].tech = tableData[i].name;
+                            break;
+                    }
+                } 
+
+            }
+            if(!locationCheckBool) {
+                obj = {location: tableData[i].location};
+                switch(tableData[i].position){
+                    case "Attending":
+                        obj.attending = tableData[i].name;
+                        break;
+                    case "CRNA":
+                        obj.crna = tableData[i].name;
+                        break;
+                    case "Resident":
+                        obj.resident = tableData[i].name;
+                        break;
+                    case "Tech":
+                        obj.tech = tableData[i].name;
+                        break;
+                }
+                tempobjs.push(obj);
+            }
+            locationCheckBool = false;
+
+        }
+
+    }
+    
+
+    mainORTableData = tempobjs;
+
     attendingTableData = tableData.filter(function(data) {
         if(data.position === "Attending"){
             return data;
@@ -227,7 +298,7 @@ function setTableData(tableData) {
         }});
     
     $('#mainORTable').bootstrapTable({
-        data: tableData
+        data: mainORTableData
     });
     $('#attendingTable').bootstrapTable({
         data: attendingTableData
@@ -267,7 +338,6 @@ function getNext() {
     timeText = now.getHours() + ":00" +" - " + (now.getHours()+ 1) + ":00";
     $('#time').text(timeText);
     destroyTables();
-    console.log(now);
     var nextData = getByTime(now);
     setTableData(nextData);
 

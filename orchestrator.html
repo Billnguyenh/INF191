@@ -87,6 +87,8 @@
              <table 
               id = "mainORTable"
                data-toggle="mainORTable"
+               data-sort-name="stargazers_count"
+               data-sort-order="desc"
                data-search="true"
                data-show-refresh="true"
                data-show-toggle="true">
@@ -94,12 +96,11 @@
 
             <thead>
                     <tr>
-                        <th data-field="location">OR Room #</th>
-                        <th data-field="position">Position</th>
-                        <th data-field="first_name">First Name</th>
-                        <th data-field="last_name">Last Name</th>
-                        <th data-field="start_time">Start Time</th>
-                        <th data-field="end_time">End Time</th>
+                        <th data-field="location" data-sortable="true">OR Room #</th>
+                        <th data-field="attending">Attending</th>
+                        <th data-field="crna">CRNA</th>
+                        <th data-field="resident">Resident</th>
+                        <th data-field="tech">Tech</th>
                         
                     </tr>
                 </thead>
