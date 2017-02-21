@@ -53,3 +53,25 @@ body {
 .timeStamp {
   font-size: .7em;
 }
+
+/* ---- BREAKS ---- */
+
+.break-lists {
+	display: block;
+}
+
+#break-buttons {
+	position: fixed;
+	bottom: 15%;
+	right: 20%;
+}
+
+.break-item {
+	max-height: 200px;
+	display: inline;
+}
+
+.break-item-info {
+	float:left;
+	width: 33%;
+}
