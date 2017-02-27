@@ -51,7 +51,13 @@
         </div>
       </nav>
 
-      <div class="container">
+      <div class="container well well-lg">
+        <h1>Break Requests</h1>
+        <div class="container">
+        <div id="break-buttons">
+          <button id="request-break-btn" data-text-swap="Cancel Request" class="btn btn-primary" type="button">Request Break</button>
+          <button id="self-break-btn" data-text-swap="End Break" type="button" class="btn btn-primary">Take Break</button>
+        </div>
         <!-- BREAK INTERFACE BODY (2 columns) -->
         <div id="break-lists" class="row">
           <div class="col-xs-1">
@@ -72,16 +78,6 @@
                 <h2>On Break</h2>
             </div>
             <!-- POPULATE WITH BREAK ITEMS -->
-            <div class="break-item">
-              <div class="break-item-info">
-                <p>Bill Nguyen</p>
-                <p>Attending</p>
-              </div>
-              <div class="break-item-info">
-                <p>Task: OR1</p>
-                <p>Time Elapsed: 3:01</p>
-              </div>
-            </div>
 
 
           </div>
@@ -91,10 +87,7 @@
         </div>
       </div>
 
-      <div id="break-buttons">
-        <button id="request-break-btn" type="button">Request Break</button>
-        <button id="self-break-btn" type="button">Self Break</button>
-      </div>
+
 
       <footer class="footer">
         <div class="container">
