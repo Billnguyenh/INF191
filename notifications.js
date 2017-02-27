@@ -18,9 +18,6 @@ Database Structure for System Activities JSON File
 
 */
 
-var USER = "CURRENT_ADMIN";
-var IS_ADMIN = false;
-
 var testJson =
 [
   {
@@ -531,17 +528,45 @@ function displayNotifications(masterArray) {
 function createAnnouncement(){}
 
 $(document).ready(function() {
-  var index = 0;
-  var notificationsArray = buildNotifications(testJson);
+  //User Info, Possibly Pulled from Local Storage
+  var USER = "CURRENT_ADMIN";
+  var IS_ADMIN = true;
 
+  //Transform JSON --> Display UI
+  var index = 0;
+  //HI JANAY: If you can, replace "testJson" with actual JSON pulled from database
+  // $.getJSON() will help pull from server
+  // $.parseJSON() will help convert pulled file into parsed string (similar to testJson's format)
+  var notificationsArray = buildNotifications(testJson);
+  displayNotifications(notificationsArray);
+
+  //Post Announcement Admin Function
   $("#postBtn").click(function () {
+
     var date = new Date();
     var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
     var freeText = $("#announcement").val()
     appendAnnouncement(new Announcement(USER, freeText, timeStamp));
+    //HI JANAY: Append a Notification object to SQL table
+    /* Basically send
+    {
+      "sender": var USER,
+      "receiver": <all?> not sure how you want to do this,
+      "type": "Announcement",
+      "freetext": var freeText,
+      "status": "null",
+      "timestamp": var timeStamp,
+      "ornumber": "null",
+      "location": "null",
+      "starttime": "null",
+      "endtime": "null",
+      "priority": "null"
+    }
+    I'll update both our naming conventions if needed as the program develops.
+    Thanks!
+    */
   });
 
-  displayNotifications(notificationsArray);
 
 
 

@@ -1,4 +1,189 @@
+<<<<<<< HEAD
 
+=======
+var orchestratorData = [
+  {
+    "first_name": "Janay",
+    "last_name": "Nunez",
+    "position": "Attending",
+    "location": "OR101",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 10:00:00",
+    "end_time": "2017-02-27 12:00:00"
+  },
+  {
+    "first_name": "Chris",
+    "last_name": "Ries",
+    "position": "CRNA",
+    "location": "OR105",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 10:00:00",
+    "end_time": "2017-02-27 12:00:00"
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Applebaum",
+    "position": "CRNA",
+    "location": "OR102",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 12:00:00",
+    "end_time": "2017-02-27 14:00:00"
+  },
+  {
+    "first_name": "Jane",
+    "last_name": "Smith",    
+    "position": "Resident",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 12:00:00",
+    "end_time": "2017-02-27 14:00:00"
+  },
+  {
+    "first_name": "Indy",
+    "last_name": "Jones",
+    "position": "Tech",
+    "location": "OR107",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 11:00:00",
+    "end_time": "2017-02-27 13:00:00"
+  },
+  {
+    "first_name": "Janay",
+    "last_name": "Nunez",
+    "position": "Attending",
+    "location": "OR102",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 18:00:00",
+    "end_time": "2017-02-27 20:00:00"
+  },
+  {
+    "first_name": "Janay",
+    "last_name": "Nunez",
+    "position": "Attending",
+    "location": "OR103",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 17:00:00",
+    "end_time": "2017-02-27 18:00:00"
+  },
+  {
+    "first_name": "Janay",
+    "last_name": "Nunez",
+    "position": "Attending",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 11:00:00",
+    "end_time": "2017-02-27 13:00:00"
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Applebaum",
+    "position": "CRNA",
+    "location": "OR101",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 15:00:00",
+    "end_time": "2017-02-27 17:00:00"
+  },
+  {
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "position": "Resident",
+    "location": "OR101",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 17:00:00",
+    "end_time": "2017-02-27 18:00:00"
+  },
+  {
+    "first_name": "Kush",
+    "last_name": "Patel",
+    "position": "Attending",
+    "location": "OR105",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 02:00:00",
+    "end_time": "2017-02-27 08:00:00"
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Applebaum",
+    "position": "Resident",
+    "location": "OR105",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 02:00:00",
+    "end_time": "2017-02-27 08:00:00"
+  },
+  {
+    "first_name": "Sam",
+    "last_name": "Nunez",
+    "position": "CRNA",
+    "location": "OR107",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 09:00:00",
+    "end_time": "2017-02-27 11:00:00"
+  },
+  {
+    "first_name": "Bill",
+    "last_name": "Nunez",
+    "position": "Resident",
+    "location": "OR107",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 11:30:00",
+    "end_time": "2017-02-27 13:00:00"
+  },
+  {
+    "first_name": "Chris",
+    "last_name": "Ries",
+    "position": "CRNA",
+    "location": "OR107",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 11:30:00",
+    "end_time": "2017-02-27 13:00:00"
+  },
+  {
+    "first_name": "Janay",
+    "last_name": "Nunez",
+    "position": "Attending",
+    "location": "OR102",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 04:20:00",
+    "end_time": "2017-02-27 05:00:00"
+  },
+  {
+    "first_name": "Kush",
+    "last_name": "Patel",
+    "position": "Tech",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 10:20:00",
+    "end_time": "2017-02-27 17:22:00"
+  },
+  {
+    "first_name": "Bill",
+    "last_name": "Nguyen",
+    "position": "CRNA",
+    "location": "OR104",
+    "type": "NULL",
+    "priority": "NULL",
+    "start_time": "2017-02-27 11:20:00",
+    "end_time": "2017-02-27 17:22:00"
+  }
+];
+>>>>>>> origin/master
 //Database call here to get data and save as var orchestratorData = ...
 var orchestratorData = JSON.parse(localStorage.getItem("orchestratorData"));
 
