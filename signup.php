@@ -36,13 +36,16 @@
 
   /* If input fields are populated, add a row to the login table. */
   $first_name = htmlentities($_POST['FirstName']);
-  $last_name = htmlentities($_POST['FirstName']);
+  $last_name = htmlentities($_POST['LastName']);
   $email = htmlentities($_POST['Email']);
+  $department = intval(htmlentities($_POST['Department']));
+  $position = htmlentities($_POST['Position']);
+  $admin = intval(htmlentities($_POST['Admin']));
   $password = htmlentities($_POST['Password']);
   $ucinetid = htmlentities($_POST['UCINetID']);
 
-  if (strlen($first_name) || strlen($last_name) || strlen($email) || strlen($password) || strlen($ucinetid)) {
-    InsertUser($connection, $first_name, $last_name, $email, $password, $ucinetid);
+  if (strlen($first_name) || strlen($last_name) || strlen($email) || strlen($password) || strlen($ucinetid) || strlen($department) || strlen($position) || strlen($admin) ) {
+    InsertUser($connection, $first_name, $last_name, $email, $password, $ucinetid, $department, $position, $admin);
   }
 ?>
    <div class="container">
@@ -53,6 +56,29 @@
          <input type="text" name="LastName" class="form-control" placeholder="Last Name" required=""></br>
          <input type="email" name="Email" class="form-control" placeholder="Email address" required="" autofocus=""></br>
          <input type="text" name="UCINetID" class="form-control" placeholder="UCI Net ID" required=""></br>
+         <select name="Department" class="form-control">
+          <option value="" selected>Select your Department</option>
+         <?php 
+              $sql = mysqli_query($connection, "SELECT DID, `name` FROM medularDB.tbl_department_types")  or die(mysql_error());  
+              while ($row = $sql->fetch_assoc()){
+                $id = $row['DID'];
+                $name = $row['name']; 
+                echo "<option value=".$id.">" . $name . "</option>";
+              }
+          ?>
+         </select></br>
+         <select name="Position" class="form-control">
+           <option value="" selected>Select your Position</option>
+           <option value="Attending">Attending</option>
+           <option value="CRNA">CRNA</option>
+           <option value="Resident">Resident</option>
+           <option value="Tech">Tech</option>
+         </select></br>
+         <select name="Admin" class="form-control">
+           <option value="" selected>Are you an Admin?</option>
+           <option value="1">Yes</option>
+           <option value="0">No</option>
+         </select></br>
          <input type="password" name="Password" class="form-control" placeholder="Password" required=""></br>
          <input type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm Password" required="">
          <span class="checkbox">
@@ -74,11 +100,11 @@
 
 <?php
 
-function InsertUser($connection, $first_name, $last_name, $email, $password, $ucinetid) {
+function InsertUser($connection, $first_name, $last_name, $email, $password, $ucinetid, $department, $position, $admin) {
 
    /*Call the sproc called "insert_new_user*/
-   $call = mysqli_prepare($connection, 'CALL medularDB.insert_new_user(?,?,?,?,?)');
-   mysqli_stmt_bind_param($call, "sssss", $ucinetid, $password, $email, $first_name, $last_name);
+   $call = mysqli_prepare($connection, 'CALL medularDB.insert_new_user(?,?,?,?,?,?,?,?)');
+   mysqli_stmt_bind_param($call, "issssssi", $department, $ucinetid, $password, $email, $first_name, $last_name, $position, $admin);
    mysqli_stmt_execute($call);
 
 
