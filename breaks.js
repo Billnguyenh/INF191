@@ -10,7 +10,7 @@ Type: queue, onbreak
 var testJson =
 [
   {
-    "name": "Dr. Samantha",
+    "name": "Sam Applebaum",
     "category": "Attending",
     "ornum": "1,2,3",
     "timestamp": "2017, 02, 27, 00, 00, 00",
@@ -29,13 +29,6 @@ var testJson =
     "ornum": "4",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
-  },
-  {
-  "name": "Dr. Kush",
-  "category": "Attending",
-  "ornum": "7",
-  "timestamp": "2017, 02, 27, 00, 00, 00",
-  "type": "onbreak"
   }
 ]
 
@@ -57,7 +50,7 @@ function RequestBreak (name, category, ornum, timestamp) {
   }
   this.getWaiting = function() {
 
-    return "Currently N/A";
+    return "00:00:00"; //CHANGE
   }
 }
 
@@ -77,7 +70,7 @@ function OnBreak (name, category, ornum, timestamp) {
     return this.ornum;
   }
   this.getTimeElapsed = function() {
-    return "Currently N/A";
+    return "00:00:00"; //CHANGE
   }
   this.print = function () {
     return "name: " + this.name + " for OR " + this.ornum;
@@ -120,7 +113,7 @@ function appendOnBreak(onBreak, index) {
       "</div> " +
       "<div class='break-item-info'> " +
         "<p>Task: OR " + ornum +"</p> " +
-        "<p>Waiting: " + elapsed + "</p> " +
+        "<p>Time: " + elapsed + "</p> " + 
       "</div> " +
       "<div class='break-item-info'> " +
         "<p> </p> " +
@@ -239,7 +232,7 @@ function eraseOnBreak() {
 
 $(document).ready(function() {
   //Current User Data from Local Storage
-  var user_self = "Bill Nguyen";
+  var user_self = "Sam Applebaum";
   var category_self = "Attending";
   var task_self = "2,3,5";
   var current_timeStamp = $.now();
