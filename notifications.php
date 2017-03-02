@@ -37,6 +37,7 @@
   $database = mysqli_select_db($connection, DB_DATABASE);
 
   /* If input fields are populated, fetch schedule */
+  $announcement = htmlentities($_POST['Announcement']);
   $json = "";
 
   FetchNotifications($connection, 1, 2, 1);
@@ -60,7 +61,13 @@
 
 
    if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
-}
+
+
+  }
+
+  function InsertNotification($connection, $PID, $PID, $isAdmin) {
+
+  }
 
 ?>
    <nav class="navbar navbar-inverse navbar-static-top">
@@ -77,10 +84,10 @@
 
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+            <li class="active"><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
             <li><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
             <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>
-            <li><a href="history.html"><span class="glyphicon glyphicon-time"></span> History</a></li>
+            <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
             <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
             </ul>
 
@@ -102,7 +109,7 @@
         <div class="col-lg-11 col-md-11 col-sm-11 col-xs-11">
           <form role="form" action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
             <div class="input-group input-group-sm">
-              <input id="announcement" type="text" class="form-control" placeholder="Write an Announcement">
+              <input id="announcement" type="text" name="Announcement" class="form-control" placeholder="Write an Announcement">
               <span class="input-group-btn">
                 <button id="postBtn" class="btn btn">Post</buton>
               </span>
