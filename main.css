@@ -22,17 +22,15 @@ body {
 .glyphicon-ok {
   color: dark
 }
-.glyphicon-remove {
-}
+
 .notification {
-  padding-bottom: 4px
-}
-.notification {
+  padding-bottom: 4px;
   background-color: white;
   border-width: thick;
   margin-left: 1px;
   margin-right: 1px;
 }
+
 .description {
   padding: 10px 5px;
   margin: 10px 0px;
@@ -50,9 +48,9 @@ body {
     display: inline;
 }
 #break-buttons {
-
     top: 15%;
-    left: 20%;}
+    left: 20%;
+}
 .break-item {
     max-height: 200px;
     display: inline-block;
@@ -63,8 +61,8 @@ body {
     width: 33%;
 }
 #on-break {
-    padding-top: 10%;
+    padding-top: 5%;
 }
 #queue {
-    padding-top: 10%;
+    padding-top: 5%;
 }

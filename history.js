@@ -4,7 +4,7 @@ var data =
     "first_name": "Janay",
     "last_name": "Nunez",
     "type": "Break",
-    "actions": "Not sure where this field should go yet",
+    "actions": "No Comment",
     "status": "Approved",
     "timestamp": "2017-01-30 21:27:45"
   },
@@ -12,7 +12,7 @@ var data =
     "first_name": "Janay",
     "last_name": "Nunez",
     "type": "Task",
-    "actions": "Not sure where this field should go yet",
+    "actions": "No Comment",
     "status": "Denied",
     "timestamp": "2017-01-30 21:31:21"
   },
@@ -20,7 +20,7 @@ var data =
     "first_name": "Sam",
     "last_name": "Applebaum",
     "type": "Task",
-    "actions": "Not sure where this field should go yet",
+    "actions": "No Comment",
     "status": "Denied",
     "timestamp": "2017-01-30 21:32:36"
   },
@@ -28,7 +28,7 @@ var data =
     "first_name": "Jane",
     "last_name": "Smith",
     "type": "Meeting",
-    "actions": "Not sure where this field should go yet",
+    "actions": "Was late",
     "status": "Denied",
     "timestamp": "2017-01-30 21:33:07"
   },
@@ -36,7 +36,7 @@ var data =
     "first_name": "Kush",
     "last_name": "Patel",
     "type": "Break",
-    "actions": "Not sure where this field should go yet",
+    "actions": "No Comment",
     "status": "Approved",
     "timestamp": "2017-01-30 22:50:07"
   }

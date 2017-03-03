@@ -83,7 +83,7 @@ function appendRequestBreak(requestBreak, index) {
   ornum = requestBreak.getOrNum();
   waitTime = requestBreak.getWaiting();
   $('#queue').append("" +
-    "<div id='break-request-" + index + "'class='break-item'> " +
+    "<div id='break-request-" + index + "'class='break-item well well-sm'> " +
       "<div class='break-item-info'> " +
         "<p>" + name + "</p> " +
         "<p>" + category + "</p> " +
