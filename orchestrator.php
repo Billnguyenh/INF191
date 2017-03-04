@@ -65,7 +65,7 @@
 }
 
 ?>
-     <nav class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
           <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -80,28 +80,24 @@
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
+              <li><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
               <li class="active"><a href="orchestrator.html"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
               <li><a href="history.html"><span class="glyphicon glyphicon-time"></span> History</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+              <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
               </ul>
-            
-            <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Sam Applebaum</p>
-
+            <p id="userName" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> </p>
           </div>
-
-
         </div>
       </nav>
-   
-   <div class="container">
+
+  <div class="container">
     <div class="row">
-      <button type="button" class="col-md-2 btn btn-primary" onclick="getPrev()">Prev</button>
-      <h2 id="time" class="col-md-8 text-center"></h2>
-      <button type="button" class="col-md-2 btn btn-primary" onclick="getNext()">Next</button>
+      <button type="button" class="col-xs-2 col-md-2 btn btn-primary" onclick="getPrev()">Prev</button>
+      <h2 id="time" class="col-xs-8 col-md-8 text-center"></h2>
+      <button type="button" class="col-xs-2 col-md-2 btn btn-primary" onclick="getNext()">Next</button>
     </div>
    </div>
-
+   
    <div class="container">
 
       <!-- Nav tabs -->
@@ -111,7 +107,6 @@
         <li role="presentation"><a href="#crna" aria-controls="messages" role="tab" data-toggle="tab">CRNA</a></li>
         <li role="presentation"><a href="#resident" aria-controls="resident" role="tab" data-toggle="tab">Resident</a></li>
         <li role="presentation"><a href="#tech" aria-controls="settings" role="tab" data-toggle="tab">Tech</a></li>
-        <li role="presentation"><a href="#services" aria-controls="settings" role="tab" data-toggle="tab">Services</a></li>
       </ul>
 
 
@@ -268,10 +263,11 @@
     </footer>
 
      <!-- Bootstrap core JavaScript
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script type="text/javascript" src="orchestrator.js">
-    </script>
+    <script type="text/javascript" src="shared.js"></script>
+    <script type="text/javascript" src="orchestrator.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 

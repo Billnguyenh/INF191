@@ -37,11 +37,11 @@
 
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-              <li class="active"><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
-              <li><a href="orchestrator.html"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
-              <li><a href="history.html"><span class="glyphicon glyphicon-time"></span> History</a></li>
-              <li><a href="settings.html"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+              <li><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+              <li class="active"><a href="breaks.php"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
+              <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
+              <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
+              <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
               </ul>
             <p id="userName" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> </p>
           </div>
