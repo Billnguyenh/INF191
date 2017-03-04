@@ -113,7 +113,7 @@ function appendOnBreak(onBreak, index) {
       "</div> " +
       "<div class='break-item-info'> " +
         "<p>Task: OR " + ornum +"</p> " +
-        "<p>Time: " + elapsed + "</p> " + 
+        "<p>Time: " + elapsed + "</p> " +
       "</div> " +
       "<div class='break-item-info'> " +
         "<p> </p> " +
@@ -232,13 +232,19 @@ function eraseOnBreak() {
 
 $(document).ready(function() {
   //Current User Data from Local Storage
+  //Hi Janay: the following group of variables need to be pulled from
+  //          the user database or local storage.
   var user_self = "Sam Applebaum";
   var category_self = "Attending";
   var task_self = "2,3,5";
   var current_timeStamp = $.now();
   var is_floater = false;
 
+
   //Arrays of Break Items
+  //Hi Janay: testJson is the parsed string version of the json file
+  //          used (located at the top of this code). Needs to be actual
+  //          json pulled from database.
   var requestQueue = buildRequestQueue(testJson);
   var onBreak = buildOnBreak(testJson);
 
@@ -258,16 +264,29 @@ $(document).ready(function() {
   //REQUEST BREAK BUTTON FUNCTION
   $("#request-break-btn").click(function() {
     if (inQueueID === null && onBreakID === null) {
+      //If user isn't inQueue or onBreak, add them to inQueue
       var reqBreak = new RequestBreak(user_self, category_self, task_self, current_timeStamp);
       requestQueue.push(reqBreak)
+      //Hi Janay: add object in SQL database. Object will be
+      //          name: user_self
+      //          category: category_self
+      //          ornum: task_self
+      //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
+      //          type: queue
 
       eraseSelfQueue();
       printRequestQueue(requestQueue);
       inQueueID = checkSelfQueueID(requestQueue, user_self);
       setBtnStates(inQueueID, onBreakID);
+
     }
     else if (inQueueID != null) {
+      //if user is inQueue, Cancel break request (take them off list)
       requestQueue.splice(inQueueID, 1);
+      //Hi Janay: queue object for user_self should exist in the database. Remove it
+      //          useful logic would be to remove item if
+      //          if (name == name_self && category == category_self)
+      //              remove(break item)
 
       eraseSelfQueue();
       printRequestQueue(requestQueue);
@@ -279,8 +298,16 @@ $(document).ready(function() {
   //SELF BREAK BUTTON FUNCTION
   $("#self-break-btn").click(function() {
     if (onBreakID === null && inQueueID === null) {
+      //If user isn't inQueue or onBreak, add them to onBreak
       var takeBreak = new OnBreak(user_self, category_self, task_self, current_timeStamp);
       onBreak.push(takeBreak);
+      //Hi Janay: add break object in SQL database. Object will be
+      //          name: user_self
+      //          category: category_self
+      //          ornum: task_self
+      //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
+      //          type: break
+      //              (this will be the same code as the first database add. Only "type" value is different)
 
       eraseOnBreak();
       printOnBreak(onBreak);
@@ -288,9 +315,21 @@ $(document).ready(function() {
       setBtnStates(inQueueID, onBreakID);
     }
     else if (onBreakID === null && inQueueID != null) {
+      //if user is inQueue, move them to onBreak
       requestQueue.splice(inQueueID, 1);
       var takeBreak = new OnBreak(user_self, category_self, task_self, current_timeStamp);
       onBreak.push(takeBreak);
+      //Hi Janay: queue object should exist in database. Remove it and add a new break object
+      //          useful logic would be to remove item if
+      //          if (name == name_self && category == category_self && type == queue)
+      //              remove(break item)
+      //
+      //then      Add break object in Database
+      //          name: user_self
+      //          category: category_self
+      //          ornum: task_self
+      //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
+      //          type: break
 
       eraseSelfQueue();
       eraseOnBreak();
@@ -301,7 +340,14 @@ $(document).ready(function() {
       setBtnStates(inQueueID, onBreakID);
     }
     else if (onBreakID != null) {
+      //if self_user is currently onBreak
       onBreak.splice(onBreakID, 1);
+      //Hi Janay: add object in SQL database. Object will be
+      //          name: user_self
+      //          category: category_self
+      //          ornum: task_self
+      //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
+      //          type: break
 
       eraseOnBreak();
       printOnBreak(onBreak);
@@ -311,6 +357,7 @@ $(document).ready(function() {
   });
 
   //RELIEVE FUNCTION FOR FLOATERS ONLY
+  // I think i'm planning to remove this button. Don't worry about this.
   $(document).on('click', '.relieve-btn', function() {
     var index = parseInt($(this).attr("value"));
     requestQueue.splice(index, 1);
@@ -320,5 +367,4 @@ $(document).ready(function() {
     inQueueID = checkSelfQueueID(requestQueue, user_self);
     setBtnStates(inQueueID);
   });
-
 });
