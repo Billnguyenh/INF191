@@ -15,7 +15,8 @@ var crnaTableData;
 var residentTableData;
 var techTableData;
 
-
+//Filters orchestrator data by time wanted
+//Also switchs the time variables to be javascript datetime objects
 function getByTime(date){
     return orchestratorData.filter(function(el) {
         var startTime = new Date(Date.parse(el.start_time.replace('-', '/', 'g')));
@@ -29,7 +30,7 @@ function getByTime(date){
 
 filteredbyDateData = getByTime(now);
 
-
+//Set's all the tables to the correct filtered data
 function setTableData(tableData) {
     var tempobjs = [], obj;
     var locationCheckBool = false;
@@ -135,6 +136,7 @@ function setTableData(tableData) {
     });
 }
 
+//Destroys tables in order to refresh filtered data to time wanted
 function destroyTables(){
     $('#mainORTable').bootstrapTable("destroy");
     $('#attendingTable').bootstrapTable("destroy");

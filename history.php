@@ -11,13 +11,12 @@
   <title>OR-History</title>
 
   <!-- Bootstrap core CSS -->
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-   <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
-
-  <link rel="stylesheet" type="text/css" href="main.css">
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
+  
 
   <!-- Custom styles for this template -->
-
+<link rel="stylesheet" type="text/css" href="main.css">
   <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
    <!--[if lt IE 9]>
      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -26,10 +25,7 @@
 
     
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.css">
-    
-  
-  <link rel="../src/stylesheet" href="bootstrap-table-filter.css">
-
+ 
 
  </head>
 
@@ -85,17 +81,13 @@
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-              <li><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
+              <li><a href="breaks.php"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
               <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
               <li class="active"><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+              <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
               </ul>
-            
-            <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Sam Applebaum</p>
-
+            <p id="userName" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> </p>
           </div>
-
-
         </div>
       </nav>
 
@@ -143,8 +135,9 @@
 </footer>
 
     <!-- Bootstrap core JavaScript
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   ================================================== --><!-- Placed at the end of the document so the pages load faster -->
 
+<<<<<<< HEAD:history.php
 <script type="text/javascript" src="history.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -157,8 +150,17 @@
     }
       
     </script>
+=======
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script type="text/javascript" src="shared.js"></script>
+    <script type="text/javascript" src="history.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
+>>>>>>> origin/master:history.php
 
 
-    <script src="../src/bootstrap-table-filter.js"></script>
  </body>
  </html>

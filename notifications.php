@@ -70,34 +70,30 @@
   }
 
 ?>
-   <nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-          <a class="navbar-brand" href="#">Medular</a>
+  <nav class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+            <a class="navbar-brand" href="#">Medular</a>
+          </div>
+
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+              <li><a href="breaks.php"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
+              <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
+              <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
+              <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+              </ul>
+            <p id="userName" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> </p>
+          </div>
         </div>
-
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-            <li><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
-            <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>
-            <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
-            </ul>
-
-          <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Sam Applebaum</p>
-
-        </div>
-
-
-      </div>
-    </nav>
+      </nav>
 
     <div class="postAnnounce container">
 
@@ -131,6 +127,7 @@
     </footer>
 
      <!-- Bootstrap core JavaScript
+<<<<<<< HEAD
    ================================================== --><!-- Placed at the end of the document so the pages load faster -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -141,6 +138,13 @@
     }
       
     </script>
+=======
+   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+   <script type="text/javascript" src="shared.js"></script>
+   <script src="notifications.js"></script>
+>>>>>>> origin/master
 
  </body>
  </html>
