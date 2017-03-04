@@ -51,8 +51,8 @@
    
    <div class="container">
     <h1>Settings</h1>
-    <div class="row">
-      <p id="email"></p>
+    <div class="row" id="profileInfo">
+     
 
     </div>
     

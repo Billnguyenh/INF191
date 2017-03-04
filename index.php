@@ -71,4 +71,22 @@
      </div><!-- /container --><!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+   <script type="text/javascript">
+      if (window.localStorage) {
+        var email = document.getElementById('emailTxt');
+
+        email.value = localStorage.getItem('email');
+
+        emailTxt.addEventListener('input', function() {
+          localStorage.setItem('email', email.value);
+          localStorage.setItem('firstName', "Samantha");
+          localStorage.setItem('lastName', "Applebaum");
+          localStorage.setItem('department', "Anesteology");
+          localStorage.setItem('position', "CRNA");
+          localStorage.setItem('uciNetId', "000000000");
+        }, false);
+      }
+
+   </script>
+
  </body></html>
