@@ -20,7 +20,6 @@ Database Structure for System Activities JSON File
 
 var notificationsData = JSON.parse(localStorage.getItem("notificationsData"));
 // ----OBJECT LIBRARY -----
-// Intitializing parameters are pulled directly from SQL database?
 
 //Shows on both User and Admin
 function Announcement (sender, description, timeStamp) {
@@ -488,6 +487,8 @@ $(document).ready(function() {
   var notificationsArray = buildNotifications(notificationsData);
   displayNotifications(notificationsArray);
 
+
+
   //Post Announcement Admin Function
   $("#postBtn").click(function () {
 
@@ -495,8 +496,7 @@ $(document).ready(function() {
     var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
     var description = $("#announcement").val()
     appendAnnouncement(new Announcement(USER, description, timeStamp));
-    window.location.reload();
- 
+
   });
 
 

@@ -30,6 +30,7 @@ function sec_session_start() {
  
 function login($email, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible. 
+    echo "In login function";
     if ($stmt = $mysqli->prepare("SELECT PID, username, `password` 
         FROM `medularDB`.`login`
         WHERE email = ?
@@ -86,6 +87,7 @@ function login($email, $password, $mysqli) {
             }
         } else {
             // No user exists.
+            echo "no user";
             return false;
         }
     }

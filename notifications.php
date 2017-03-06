@@ -44,13 +44,14 @@
 
   if(strlen(trim($announcement)) > 0){
     InsertAnnouncement($connection, 1, 2, $announcement, 1);
+    header('Refresh: 0');
   }
+
 
 
 
   function FetchNotifications($connection, $department, $PID, $isAdmin) {
 
-  
    $call = mysqli_prepare($connection, 'CALL medularDB.fetch_notification_details(?,?,?)');
    mysqli_stmt_bind_param($call, "iii", $isAdmin, $PID, $$department);
    mysqli_stmt_execute($call);

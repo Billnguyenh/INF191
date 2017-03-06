@@ -73,13 +73,12 @@ if (login_check($mysqli) == true) {
                  <input type="password" class="form-control" placeholder="Password">
               </div>
            </div>
-             
              <label class="checkbox">
                  <label style="padding-left: 25px;" class="checkbox">
                  Remember me
              </label>
-             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" onclick="formhash(this.form, this.form.password);>Sign in</a>
-             <a class="btn btn-lg btn-primary btn-block" href="signup.html" role="button">Get Started&nbsp;</a>
+             <a class="btn btn-lg btn-primary btn-block" type="submit" href="http://www.or-orchestrator.com/notifications.php" id="signIn" onclick="formhash(this.form, this.form.password);">Sign in</a>
+             <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -109,6 +108,12 @@ if (login_check($mysqli) == true) {
       if (window.localStorage) {
           localStorage.setItem("userObject", JSON.stringify(userObject));
       }
+
+        $("#signIn").click(function () {
+
+        });
+
+
 
    </script>
     
