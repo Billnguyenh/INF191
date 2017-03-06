@@ -102,7 +102,7 @@ if (login_check($mysqli) == true) {
 
 
         $("#signIn").click(function () {
-            var userObject =  var userObject = {
+            var userObject = {
         "first_name": "Samantha",
         "last_name": "Applebaum",
         "person_id": 4,

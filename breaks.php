@@ -37,7 +37,7 @@
 
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="http://www.or-orchestrator.com/notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+              <li><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
               <li class="active"><a href="breaks.php"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
               <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>
               <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
