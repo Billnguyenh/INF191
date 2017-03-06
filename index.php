@@ -95,19 +95,18 @@ if (login_check($mysqli) == true) {
               $(this).removeClass("floating-label-form-group-with-focus");
           });
       });
+      var userObject = {
+        "first_name": "Samantha",
+        "last_name": "Applebaum",
+        "person_id": 4,
+        "email": "sappleba@uci.edu",
+        "department_id": 1,
+        "position": "CRNA",
+        "username": "sappleba",
+        "isAdmin": 1,
+    };
       if (window.localStorage) {
-        var email = document.getElementById('emailTxt');
-
-        email.value = localStorage.getItem('email');
-
-        emailTxt.addEventListener('input', function() {
-          localStorage.setItem('email', email.value);
-          localStorage.setItem('firstName', "Samantha");
-          localStorage.setItem('lastName', "Applebaum");
-          localStorage.setItem('department', "Anesteology");
-          localStorage.setItem('position', "CRNA");
-          localStorage.setItem('uciNetId', "000000000");
-        }, false);
+          localStorage.setItem("userObject", JSON.stringify(userObject));
       }
 
    </script>
