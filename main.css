@@ -43,26 +43,12 @@ body {
 .timeStamp {
   font-size: .7em;
 }
-/* ---- BREAKS ---- */
-.break-lists {
-    display: inline;
-}
+
 #break-buttons {
-    top: 15%;
-    left: 20%;
-}
-.break-item {
-    max-height: 200px;
-    display: inline-block;
+  float: right;
+  margin: auto 10%;
 }
 
-.break-item-info {
-    float:left;
-    width: 33%;
-}
-#on-break {
-    padding-top: 5%;
-}
-#queue {
-    padding-top: 5%;
+#on-break-section {
+  padding-bottom: 10%;
 }

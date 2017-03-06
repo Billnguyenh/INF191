@@ -12,7 +12,7 @@
      <!-- Bootstrap core CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
-     
+
 
      <!-- Custom styles for this template -->
     <link rel="stylesheet" type="text/css" href="main.css">
@@ -39,7 +39,7 @@
             <ul class="nav navbar-nav">
               <li><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
               <li class="active"><a href="breaks.php"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
-              <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
+              <li><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>
               <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
               <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
               </ul>
@@ -48,41 +48,35 @@
         </div>
       </nav>
 
-     <div class="container well well-lg">
-        <h1>Break Requests</h1>
-        <div class="container">
+     <div class="container">
+       <div class="table-responsive">
+         <h2>Break Request Queue</h2>
+         <table id="queue" class="table table-striped table-hover">
+           <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>OR Room</th>
+            <th>Waiting</th>
+          </tr>
+        </table>
+      </div>
+      <div id="on-break-section" class="table-responsive">
+        <h2>On Break</h2>
+        <table id="on-break" class="table table-hover">
+          <tr>
+           <th>Name</th>
+           <th>Category</th>
+           <th>OR Room</th>
+           <th>Time Elapsed</th>
+         </tr>
+       </table>
+     </div>
+
+
         <div id="break-buttons">
           <button id="request-break-btn" data-text-swap="Cancel Request" class="btn btn-primary" type="button">Request Break</button>
           <button id="self-break-btn" data-text-swap="End Break" type="button" class="btn btn-primary">Take Break</button>
         </div>
-        <!-- BREAK INTERFACE BODY (2 columns) -->
-        <div id="break-lists" class="row">
-          <div class="col-xs-1">
-
-          </div>
-          <!-- BREAK REQUEST QUEUE (LEFT COLUMN) -->
-          <div id="queue" class="col-xs-5">
-            <div id="queue-title" class="row">
-                <h2>Break Request Queue</h2>
-            </div>
-            <!-- POPULATE WITH BREAK ITEMS -->
-
-          </div>
-
-          <!-- ON BREAK LIST (RIGHT COLUMN) -->
-          <div id="on-break" class="col-xs-5">
-            <div id="on-break-title" class="row">
-                <h2>On Break</h2>
-            </div>
-            <!-- POPULATE WITH BREAK ITEMS -->
-
-
-          </div>
-          <div class="col-xs-1">
-
-          </div>
-        </div>
-      </div>
       </div>
 
 

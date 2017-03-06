@@ -4,7 +4,7 @@ Name
 Category
 OR#(s)
 TimeStamp
-Type: queue, onbreak
+Type: queue, break
 */
 
 var testJson =
@@ -29,6 +29,13 @@ var testJson =
     "ornum": "4",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
+  },
+  {
+    "name": "Dr. Diddy Ries",
+    "category": "Attending",
+    "ornum": "4",
+    "timestamp": "2017, 02, 27, 00, 00, 00",
+    "type": "break"
   }
 ]
 
@@ -50,7 +57,7 @@ function RequestBreak (name, category, ornum, timestamp) {
   }
   this.getWaiting = function() {
 
-    return "00:00:00"; //CHANGE
+    return "00:00"; //CHANGE
   }
 }
 
@@ -83,20 +90,26 @@ function appendRequestBreak(requestBreak, index) {
   ornum = requestBreak.getOrNum();
   waitTime = requestBreak.getWaiting();
   $('#queue').append("" +
-    "<div id='break-request-" + index + "'class='break-item well well-sm'> " +
-      "<div class='break-item-info'> " +
-        "<p>" + name + "</p> " +
-        "<p>" + category + "</p> " +
-      "</div> " +
-      "<div class='break-item-info'> " +
-        "<p>Task: OR " + ornum +"</p> " +
-        "<p>Waiting: " + waitTime + "</p> " +
-      "</div> " +
-      "<div class='break-item-info'> " +
-        "<p> </p> " +
-        "<button class='relieve-btn' value='" + index + "' type='button'>Relieve</button> " +
-      "</div> " +
-    "</div> "
+    "<tr class='break-item'> " +
+      "<td>" + name + "</td> " +
+      "<td>" + category + "</td> " +
+      "<td>" + ornum +"</td> " +
+      "<td>" + waitTime + "</td> " +
+    "</tr> "
+  )
+}
+function appendSelfRequestBreak(requestBreak, index) {
+  name = requestBreak.getName();
+  category = requestBreak.getCategory();
+  ornum = requestBreak.getOrNum();
+  waitTime = requestBreak.getWaiting();
+  $('#queue').append("" +
+    "<tr class='break-item success'> " +
+      "<td>" + name + "</td> " +
+      "<td>" + category + "</td> " +
+      "<td>" + ornum +"</td> " +
+      "<td>" + waitTime + "</td> " +
+    "</tr> "
   )
 }
 
@@ -106,20 +119,27 @@ function appendOnBreak(onBreak, index) {
   ornum = onBreak.getOrNum();
   elapsed = onBreak.getTimeElapsed();
   $('#on-break').append("" +
-    "<div id='on-break-" + index + "'class='break-item'> " +
-      "<div class='break-item-info'> " +
-        "<p>" + name + "</p> " +
-        "<p>" + category + "</p> " +
-      "</div> " +
-      "<div class='break-item-info'> " +
-        "<p>Task: OR " + ornum +"</p> " +
-        "<p>Time: " + elapsed + "</p> " +
-      "</div> " +
-      "<div class='break-item-info'> " +
-        "<p> </p> " +
-        //"<button value='" + index + "' type='button'>End Break</button> " +
-      "</div> " +
-    "</div> "
+    "<tr class='break-item'> " +
+      "<td>" + name + "</td> " +
+      "<td>" + category + "</td> " +
+      "<td>" + ornum +"</td> " +
+      "<td>" + elapsed + "</td> " +
+    "</tr> "
+  )
+}
+
+function appendSelfOnBreak(onBreak, index) {
+  name = onBreak.getName();
+  category = onBreak.getCategory();
+  ornum = onBreak.getOrNum();
+  elapsed = onBreak.getTimeElapsed();
+  $('#on-break').append("" +
+    "<tr class='break-item success'> " +
+      "<td>" + name + "</td> " +
+      "<td>" + category + "</td> " +
+      "<td>" + ornum +"</td> " +
+      "<td>" + elapsed + "</td> " +
+    "</tr> "
   )
 }
 
@@ -141,7 +161,7 @@ function buildOnBreak(jsonStr) {
   var index = 0;
   for (i = 0; i < jsonStr.length; i++) {
     var current = jsonStr[i];
-    if (current.type === "onbreak") {
+    if (current.type === "break") {
       onBreak[index] = new OnBreak (current.name, current.category, current.ornum, current.timestamp)
       index++;
     }
@@ -149,18 +169,28 @@ function buildOnBreak(jsonStr) {
   return onBreak;
 }
 
-function printRequestQueue(array) {
+function printRequestQueue(array, user_self) {
   var index = 0;
   for (i = 0; i < array.length; i++) {
-    appendRequestBreak(array[i], index);
+    if (array[i].getName() === user_self){
+      appendSelfRequestBreak(array[i], index);
+    }
+    else {
+      appendRequestBreak(array[i], index);
+    }
     index++;
   }
 }
 
-function printOnBreak(array) {
+function printOnBreak(array, user_self) {
   var index = 0;
   for (i = 0; i < array.length; i++) {
-    appendOnBreak(array[i], index);
+    if (array[i].getName() === user_self) {
+      appendSelfOnBreak(array[i], index);
+    }
+    else {
+      appendOnBreak(array[i], index);
+    }
     index++;
 
   }
@@ -213,9 +243,12 @@ function checkOnBreakID (array, user_self) {
 function eraseSelfQueue() {
   $("#queue").empty();
   $("#queue").append("" +
-    "<div id='queue-title' class='row'>" +
-        "<h2>Break Request Queue</h2>" +
-    "</div>"
+   '<tr>'+
+    '<th>Name</th>'+
+    '<th>Category</th>'+
+    '<th>OR Room</th>'+
+    '<th>Waiting</th>'+
+  '</tr>'
   )
 }
 
@@ -223,9 +256,12 @@ function eraseSelfQueue() {
 function eraseOnBreak() {
   $("#on-break").empty();
   $("#on-break").append("" +
-    "<div id='on-break-title' class='row'>" +
-        "<h2>On Break</h2>" +
-    "</div>"
+    '<tr>'+
+     '<th>Name</th>'+
+     '<th>Category</th>'+
+     '<th>OR Room</th>'+
+     '<th>Time Elapsed</th>'+
+   '</tr>'
   )
 }
 
@@ -257,8 +293,8 @@ $(document).ready(function() {
   //Set button values
 
   //print from JSON, LOAD PAGE
-  printRequestQueue(requestQueue);
-  printOnBreak(onBreak);
+  printRequestQueue(requestQueue, user_self);
+  printOnBreak(onBreak, user_self);
   var date = new Date();
 
   //REQUEST BREAK BUTTON FUNCTION
@@ -275,7 +311,7 @@ $(document).ready(function() {
       //          type: queue
 
       eraseSelfQueue();
-      printRequestQueue(requestQueue);
+      printRequestQueue(requestQueue, user_self);
       inQueueID = checkSelfQueueID(requestQueue, user_self);
       setBtnStates(inQueueID, onBreakID);
 
@@ -289,7 +325,7 @@ $(document).ready(function() {
       //              remove(break item)
 
       eraseSelfQueue();
-      printRequestQueue(requestQueue);
+      printRequestQueue(requestQueue, user_self);
       inQueueID = checkSelfQueueID(requestQueue, user_self);
       setBtnStates(inQueueID, onBreakID);
     }
@@ -310,7 +346,7 @@ $(document).ready(function() {
       //              (this will be the same code as the first database add. Only "type" value is different)
 
       eraseOnBreak();
-      printOnBreak(onBreak);
+      printOnBreak(onBreak, user_self);
       onBreakID = checkOnBreakID(onBreak, user_self);
       setBtnStates(inQueueID, onBreakID);
     }
@@ -333,8 +369,8 @@ $(document).ready(function() {
 
       eraseSelfQueue();
       eraseOnBreak();
-      printRequestQueue(requestQueue);
-      printOnBreak(onBreak);
+      printRequestQueue(requestQueue, user_self);
+      printOnBreak(onBreak, user_self);
       inQueueID = checkSelfQueueID(requestQueue, user_self);
       onBreakID = checkOnBreakID(onBreak, user_self);
       setBtnStates(inQueueID, onBreakID);
@@ -350,21 +386,9 @@ $(document).ready(function() {
       //          type: break
 
       eraseOnBreak();
-      printOnBreak(onBreak);
+      printOnBreak(onBreak, user_self);
       onBreakID = checkOnBreakID(onBreak, user_self);
       setBtnStates(inQueueID, onBreakID);
     }
-  });
-
-  //RELIEVE FUNCTION FOR FLOATERS ONLY
-  // I think i'm planning to remove this button. Don't worry about this.
-  $(document).on('click', '.relieve-btn', function() {
-    var index = parseInt($(this).attr("value"));
-    requestQueue.splice(index, 1);
-
-    eraseSelfQueue();
-    printRequestQueue(requestQueue);
-    inQueueID = checkSelfQueueID(requestQueue, user_self);
-    setBtnStates(inQueueID);
   });
 });
