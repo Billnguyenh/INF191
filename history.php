@@ -137,7 +137,7 @@
     <!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster -->
 
-<<<<<<< HEAD:history.php
+
 <script type="text/javascript" src="history.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
@@ -150,16 +150,9 @@
     }
       
     </script>
-=======
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-  <script type="text/javascript" src="shared.js"></script>
-    <script type="text/javascript" src="history.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
-
->>>>>>> origin/master:history.php
 
 
  </body>

@@ -1,6 +1,6 @@
 <?php
-include_once '../inc/db_connect.php';
-include_once '../inc/login_functions.php';
+include "../inc/dbinfo.inc";
+/*include_once '../inc/login_functions.php';
 
 sec_session_start();
 
@@ -9,8 +9,9 @@ if (login_check($mysqli) == true) {
 } else {
     $logged = 'out';
 
-}
+}*/
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -41,21 +42,21 @@ if (login_check($mysqli) == true) {
  <body>
 
      <?php
-     if (isset($_GET['error'])) {
-         echo '<p class="error">Error Logging In!</p>';
-     }
+      /* Connect to MySQL and select the database. */
+        $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+
+        if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+        $database = mysqli_select_db($connection, DB_DATABASE);
+
+        $email = htmlentities($_POST['Email']);
+        $password = htmlentities($_POST['Password']);
+   
+
+        if (strlen($email) || strlen($password)) {
+          InsertUser($connection, $email, $password);
+        }
      ?>
-
-
-     <form action="process_login.php" method="post" name="login_form">                      
-            Email: <input type="text" name="email" />
-            Password: <input type="password" 
-                             name="password" 
-                             id="password"/>
-            <input type="button" 
-                   value="Login" 
-                   onclick="formhash(this.form, this.form.password);" /> 
-        </form>
 
 
      <div class="container">
@@ -64,20 +65,20 @@ if (login_check($mysqli) == true) {
              <div class="row">
                <div class="form-group floating-label-form-group">
                   <label>Email Address</label>
-                   <input id="emailTxt" type="email" class="form-control" placeholder="Email address" autofocus="">
+                   <input id="emailTxt" name="Email" type="email" class="form-control" placeholder="Email address" autofocus="">
                 </div>
              </div>
              <div class="row">
              <div class="form-group floating-label-form-group">
                 <label>Password</label>
-                 <input type="password" class="form-control" placeholder="Password">
+                 <input type="password" name="Password" class="form-control" placeholder="Password">
               </div>
            </div>
-             <label class="checkbox">
-                 <label style="padding-left: 25px;" class="checkbox">
+             <label style="padding-left: 25px;" class="checkbox">
+                <input type="checkbox" value="remember-me">
                  Remember me
              </label>
-             <a class="btn btn-lg btn-primary btn-block" type="submit" href="http://www.or-orchestrator.com/notifications.php" id="signIn" onclick="formhash(this.form, this.form.password);">Sign in</a>
+             <a class="btn btn-lg btn-primary btn-block" type="submit" href="http://www.or-orchestrator.com/notifications.php" id="signIn";">Sign in</a>
              <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
@@ -95,15 +96,7 @@ if (login_check($mysqli) == true) {
           });
       });
       // Janay overhere! Change this userObject to be from db :) thanks
-      var userObject = {
-        "first_name": "Samantha",
-        "last_name": "Applebaum",
-        "person_id": 4,
-        "email": "sappleba@uci.edu",
-        "department_id": 1,
-        "position": "CRNA",
-        "username": "sappleba",
-        "isAdmin": 1,
+      var userObject = <?php echo $GLOBALS['json'] ?>;
     };
       if (window.localStorage) {
           localStorage.setItem("userObject", JSON.stringify(userObject));
@@ -132,3 +125,35 @@ if (login_check($mysqli) == true) {
       
  </body>
 </html>
+
+<?php
+
+function InsertUser($connection,$email, $password) {
+
+   /*Call the sproc called "insert_new_user*/
+   $call = mysqli_prepare($connection, 'CALL medularDB.fetch_user_details(?,?)');
+   mysqli_stmt_bind_param($call, "ss", $email, $password);
+   mysqli_stmt_execute($call);
+
+   $result = mysqli_stmt_get_result($call);
+
+   $rows = array();
+   while($r = mysqli_fetch_assoc($result)){
+    $rows[] = $r;
+   }
+
+   if(empty($rows)){
+      echo '<div style="text-align: center;">';
+      echo '<p><span style="color: red;">Incorrect login info, please try again</span></p>';
+      echo '</div>';
+   }else{
+      alert("hi");
+      $GLOBALS['json'] = json_encode($rows);
+      header('Location: http://www.or-orchestrator.com/notifications.php');
+   }
+
+
+   if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
+}
+
+?>
