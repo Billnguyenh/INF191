@@ -18,10 +18,7 @@ Database Structure for System Activities JSON File
 
 */
 
-var USER = "CURRENT_ADMIN";
-var IS_ADMIN = false;
-
-var testJson =
+/*var notificationsData =
 [
   {
     "sender": "Dr. Rajan",
@@ -43,8 +40,7 @@ var testJson =
     "freetext": "null",
     "status": "in-progress",
     "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "5",
-    "location": "null",
+    "location": "OR5",
     "starttime": "null",
     "endtime": "null",
     "priority": "null"
@@ -57,7 +53,7 @@ var testJson =
     "status": "complete",
     "timestamp": "2017-01-28 11:00:21",
     "ornumber": "12",
-    "location": "null",
+    "location": "OR12",
     "starttime": "null",
     "endtime": "null",
     "priority": "null"
@@ -70,26 +66,27 @@ var testJson =
     "status": "null",
     "timestamp": "2017-01-28 11:00:21",
     "ornumber": "8",
-    "location": "null",
+    "location": "OR8",
     "starttime": "null",
     "endtime": "null",
     "priority": "null"
   }
-]
+]*/
+var notificationsData = JSON.parse(localStorage.getItem("notificationsData"));
 // ----OBJECT LIBRARY -----
 // Intitializing parameters are pulled directly from SQL database?
 
 //Shows on both User and Admin
-function Announcement (sender, freetext, timeStamp) {
+function Announcement (sender, description, timeStamp) {
   this.sender = sender;
-  this.freetext = freetext;
+  this.description = description;
   this.timeStamp = timeStamp;
 
   this.getTimeStamp = function () {
     return this.timeStamp;
   }
   this.getHeader = function() {
-    return this.freetext;
+    return this.description;
   };
   this.getDescription = function () {
     return "Announcement written by " + this.sender;
@@ -97,23 +94,23 @@ function Announcement (sender, freetext, timeStamp) {
 }
 
 //Shows on only User Screens
-function TaskAssignment (sender, status, timeStamp, orNum) {
+function TaskAssignment (sender, status, timeStamp, location) {
   this.sender = sender;
   this.timeStamp = timeStamp;
-  this.orNum = orNum;
+  this.location = location;
   this.status = status;
 
   this.getStatus = function () {
     return this.status;
   }
-  this.getOrNum = function () {
-    return this.orNum;
+  this.getLocation = function () {
+    return this.location;
   }
   this.getTimeStamp = function () {
     return this.timeStamp;
   }
   this.getHeader = function() {
-    return this.sender + " has assigned you to OR" + this.orNum;
+    return this.sender + " has assigned you to " + this.location;
   };
   this.getDescription = function () {
     return "Status: " + this.status;
@@ -121,9 +118,9 @@ function TaskAssignment (sender, status, timeStamp, orNum) {
 }
 
 
-function MeetingApproved (sender, freetext, timestamp, location, starttime, endtime, priority) {
+function MeetingApproved (sender, description, timestamp, location, starttime, endtime, priority) {
   this.sender = sender;
-  this.freeText = freetext;
+  this.description = description;
   this.timeStamp = timestamp;
   this.location = location;
   this.startTime = starttime;
@@ -143,25 +140,25 @@ function MeetingApproved (sender, freetext, timestamp, location, starttime, endt
     return "Priority: " + this.priority +"</br>" +
           "Location: " + this.location + "</br>" +
           this.startTime + " to " + this.endTime + "</br>" +
-          "Additional notes: </br>" + this.freeText;
+          "Additional notes: </br>" + this.description;
   };
 }
 
 
 //Shows on only Admin Screens
-function TaskCompleted (sender, timeStamp, orNum) {
+function TaskCompleted (sender, timeStamp, location) {
   this.sender = sender;
   this.timeStamp = timeStamp;
-  this.orNum = orNum;
+  this.location = location;
 
   this.getTimeStamp = function () {
     return this.timeStamp;
   }
-  this.getOrNum = function () {
-    return this.orNum;
+  this.getLocation = function () {
+    return this.location;
   }
   this.getHeader = function() {
-    return this.sender + " has completed their task in OR" + this.orNum;
+    return this.sender + " has completed their task in " + this.location;
   };
   this.getDescription = function () {
     return "DEV NOTE: description to be determined";
@@ -169,9 +166,9 @@ function TaskCompleted (sender, timeStamp, orNum) {
 
 }
 
-function MeetingRequest (sender, freetext, status, timestamp, location, starttime, endtime, priority) {
+function MeetingRequest (sender, description, status, timestamp, location, starttime, endtime, priority) {
   this.sender = sender;
-  this.freeText = freetext;
+  this.description = description;
   this.status = status;
   this.timeStamp = timestamp;
   this.location = location;
@@ -204,7 +201,7 @@ function MeetingRequest (sender, freetext, status, timestamp, location, starttim
           "Location: " + this.location + "</br>" +
           this.startTime + " to " + this.endTime + "</br>" +
           "Status: " + this.status +"</br>" +
-          "Additional notes: </br>" + this.freeText;
+          "Additional notes: </br>" + this.description;
   };
   function approve() {
     this.status = "approved";
@@ -470,19 +467,19 @@ function buildNotifications(jsonStr) {
   for (i = 0; i < jsonStr.length; i++) {
     var current = jsonStr[i];
     if (current.type === "Announcement") {
-      notificationsArray[i] = new Announcement(current.sender, current.freetext, current.timestamp);
+      notificationsArray[i] = new Announcement(current.sender, current.description, current.timestamp);
     }
     else if (current.type === "TaskAssignment") {
-      notificationsArray[i] = new TaskAssignment (current.sender, current.status, current.timestamp, current.ornumber);
+      notificationsArray[i] = new TaskAssignment (current.sender, current.status, current.timestamp, current.location);
     }
     else if (current.type === "TaskCompleted") {
-      notificationsArray[i]  = new TaskCompleted(current.sender, current.timestamp, current.ornumber, current.assigner);
+      notificationsArray[i]  = new TaskCompleted(current.sender, current.timestamp, current.location, current.assigner);
     }
     else if (current.type === "MeetingRequest") {
-      notificationsArray[i] = new MeetingRequest(current.sender, current.freetext, current.status, current.timestamp, current.location, current.starttime, current.endtime, current.priority);
+      notificationsArray[i] = new MeetingRequest(current.sender, current.description, current.status, current.timestamp, current.location, current.starttime, current.endtime, current.priority);
     }
     else if (current.type === "MeetingApproved") {
-      notificationsArray[i] = new MeetingApproved(current.sender, current.freetext, current.timestamp, current.location, current.starttime, current.endtime, current.priority);
+      notificationsArray[i] = new MeetingApproved(current.sender, current.description, current.timestamp, current.location, current.starttime, current.endtime, current.priority);
     }
     else if (current.type === "Break") {
 
@@ -531,17 +528,45 @@ function displayNotifications(masterArray) {
 function createAnnouncement(){}
 
 $(document).ready(function() {
-  var index = 0;
-  var notificationsArray = buildNotifications(testJson);
+  //User Info, Possibly Pulled from Local Storage
+  var USER = "CURRENT_ADMIN";
+  var IS_ADMIN = true;
 
+  //Transform JSON --> Display UI
+  var index = 0;
+  //HI JANAY: If you can, replace "testJson" with actual JSON pulled from database
+  // $.getJSON() will help pull from server
+  // $.parseJSON() will help convert pulled file into parsed string (similar to testJson's format)
+  var notificationsArray = buildNotifications(notificationsData);
+  displayNotifications(notificationsArray);
+
+  //Post Announcement Admin Function
   $("#postBtn").click(function () {
+
     var date = new Date();
     var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
-    var freeText = $("#announcement").val()
-    appendAnnouncement(new Announcement(USER, freeText, timeStamp));
+    var description = $("#announcement").val()
+    appendAnnouncement(new Announcement(USER, description, timeStamp));
+    //HI JANAY: Append a Notification object to SQL table
+    /* Basically send
+    {
+      "sender": var USER,
+      "receiver": <all?> not sure how you want to do this,
+      "type": "Announcement",
+      "freetext": var freeText,
+      "status": "null",
+      "timestamp": var timeStamp,
+      "ornumber": "null",
+      "location": "null",
+      "starttime": "null",
+      "endtime": "null",
+      "priority": "null"
+    }
+    I'll update both our naming conventions if needed as the program develops.
+    Thanks!
+    */
   });
 
-  displayNotifications(notificationsArray);
 
 
 

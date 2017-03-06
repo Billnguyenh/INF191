@@ -1,3 +1,4 @@
+<?php include "../inc/dbinfo.inc"; ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -28,7 +29,43 @@
  </head>
 
  <body>
-     <nav class="navbar navbar-inverse navbar-static-top">
+ <?php
+
+  /* Connect to MySQL and select the database. */
+  $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+
+  if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+  $database = mysqli_select_db($connection, DB_DATABASE);
+
+  /* If input fields are populated, fetch schedule */
+  $json = "";
+
+  FetchOrchestrator($connection, 1, 2, 1);
+
+
+
+  function FetchOrchestrator($connection, $department, $PID, $isAdmin) {
+
+   /*Call the sproc called "insert_new_user*/
+   $call = mysqli_prepare($connection, 'CALL medularDB.fetch_orchestrator_schedule(?,?,?)');
+   mysqli_stmt_bind_param($call, "iii", $department, $PID, $isAdmin);
+   mysqli_stmt_execute($call);
+   $result = mysqli_stmt_get_result($call);
+
+   $rows = array();
+   while($r = mysqli_fetch_assoc($result)){
+    $rows[] = $r;
+   }
+
+   $GLOBALS['json'] = json_encode($rows);
+
+
+   if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
+}
+
+?>
+    <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
           <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -42,29 +79,25 @@
 
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li><a href="notifications.html"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-calendar"></span> Schedule</a></li>
-              <li class="active"><a href="orchestrator.html"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
-              <li><a href="history.html"><span class="glyphicon glyphicon-time"></span> History</a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+              <li><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
+              <li><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
+              <li class="active"><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
+              <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
+              <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
               </ul>
-            
-            <p class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> Sam Applebaum</p>
-
+            <p id="userName" class="navbar-text navbar-right"><span class="glyphicon glyphicon-user"></span> </p>
           </div>
-
-
         </div>
       </nav>
-   
-   <div class="container">
+
+  <div class="container">
     <div class="row">
-      <button type="button" class="col-md-2 btn btn-primary" onclick="getPrev()">Prev</button>
-      <h2 id="time" class="col-md-8 text-center"></h2>
-      <button type="button" class="col-md-2 btn btn-primary" onclick="getNext()">Next</button>
+      <button type="button" class="col-xs-2 col-md-2 btn btn-primary" onclick="getPrev()">Prev</button>
+      <h2 id="time" class="col-xs-8 col-md-8 text-center"></h2>
+      <button type="button" class="col-xs-2 col-md-2 btn btn-primary" onclick="getNext()">Next</button>
     </div>
    </div>
-
+   
    <div class="container">
 
       <!-- Nav tabs -->
@@ -74,7 +107,6 @@
         <li role="presentation"><a href="#crna" aria-controls="messages" role="tab" data-toggle="tab">CRNA</a></li>
         <li role="presentation"><a href="#resident" aria-controls="resident" role="tab" data-toggle="tab">Resident</a></li>
         <li role="presentation"><a href="#tech" aria-controls="settings" role="tab" data-toggle="tab">Tech</a></li>
-        <li role="presentation"><a href="#services" aria-controls="settings" role="tab" data-toggle="tab">Services</a></li>
       </ul>
 
 
@@ -87,6 +119,8 @@
              <table 
               id = "mainORTable"
                data-toggle="mainORTable"
+               data-sort-name="stargazers_count"
+               data-sort-order="desc"
                data-search="true"
                data-show-refresh="true"
                data-show-toggle="true">
@@ -94,12 +128,11 @@
 
             <thead>
                     <tr>
-                        <th data-field="location">OR Room #</th>
-                        <th data-field="position">Position</th>
-                        <th data-field="first_name">First Name</th>
-                        <th data-field="last_name">Last Name</th>
-                        <th data-field="start_time">Start Time</th>
-                        <th data-field="end_time">End Time</th>
+                        <th data-field="location" data-sortable="true">OR Room #</th>
+                        <th data-field="attending">Attending</th>
+                        <th data-field="crna">CRNA</th>
+                        <th data-field="resident">Resident</th>
+                        <th data-field="tech">Tech</th>
                         
                     </tr>
                 </thead>
@@ -230,14 +263,23 @@
     </footer>
 
      <!-- Bootstrap core JavaScript
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
+    <script type="text/javascript" src="shared.js"></script>
     <script type="text/javascript" src="orchestrator.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
 
-    <script src="../src/bootstrap-table-filter.js"></script>
-
+    <script type="text/javascript">
+    	window.onload = function() {
+   			var orchestratorData = <?php echo $GLOBALS['json'] ?>;
+    		localStorage.setItem("orchestratorData", JSON.stringify(orchestratorData));
+    		/*console.log(localStorage.getItem("orchestratorData"));*/
+		}
+    	
+    </script>
     
  </body>
  </html>
+  
