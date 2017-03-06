@@ -1,6 +1,6 @@
 <?php
-include_once 'inc/db_connect.php';
-include_once 'inc/login_functions.php';
+include_once '../inc/db_connect.php';
+include_once '../inc/login_functions.php';
 
 sec_session_start();
 
@@ -34,8 +34,8 @@ if (login_check($mysqli) == true) {
      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <!-[endif]-->
-   <script type="text/JavaScript" src="js/sha512.js"></script>
-   <script type="text/JavaScript" src="js/forms.js"></script>
+   <script type="text/JavaScript" src="sha512.js"></script>
+   <script type="text/JavaScript" src="forms.js"></script>
  </head>
 
  <body>
@@ -47,7 +47,7 @@ if (login_check($mysqli) == true) {
      ?>
 
 
-     <form action="includes/process_login.php" method="post" name="login_form">                      
+     <form action="process_login.php" method="post" name="login_form">                      
             Email: <input type="text" name="email" />
             Password: <input type="password" 
                              name="password" 
@@ -59,32 +59,50 @@ if (login_check($mysqli) == true) {
 
 
      <div class="container">
-         <form class="form-signin" role="form">
+         <form class="form-signin" action="../inc/process_login.php" method="post" role="form">
              <h2 class="form-signin-heading">Please sign in</h2>
-             <input type="email" class="form-control" placeholder="Email address" autofocus="">
-             <input type="password" class="form-control" placeholder="Password">
-             <label class="checkbox">
+             <input type="email" name="email" class="form-control" placeholder="Email address" autofocus="">
+             <input type="password" name="password" class="form-control" placeholder="Password">
+             <label style="padding-left: 25px;" class="checkbox">
                  <input type="checkbox" value="remember-me">
                  Remember me
              </label>
-             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.html">Sign in</a>
-             <a class="btn btn-lg btn-primary btn-block" href="signup.html" role="button">Get Started&nbsp;</a>
+             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" onclick="formhash(this.form, this.form.password);" >Sign in</a>
+             <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+      if (window.localStorage) {
+        var email = document.getElementById('emailTxt');
+
+        email.value = localStorage.getItem('email');
+
+        emailTxt.addEventListener('input', function() {
+          localStorage.setItem('email', email.value);
+          localStorage.setItem('firstName', "Samantha");
+          localStorage.setItem('lastName', "Applebaum");
+          localStorage.setItem('department', "Anesteology");
+          localStorage.setItem('position', "CRNA");
+          localStorage.setItem('uciNetId', "000000000");
+        }, false);
+      }
+
+   </script>
     
 <?php
+        echo '<div style="text-align: center;">';
         if (login_check($mysqli) == true) {
                         echo '<p>Currently logged ' . $logged . ' as ' . htmlentities($_SESSION['username']) . '.</p>';
- 
-            echo '<p>Do you want to change user? <a href="includes/logout.php">Log out</a>.</p>';
+            
+            echo '<p>Do you want to change user? <a href="logout.php">Log out</a>.</p>';
         } else {
                         echo '<p>Currently logged ' . $logged . '.</p>';
-                        echo "<p>If you don't have a login, please <a href='register.php'>register</a></p>";
+                        echo "<p>If you don't have a login, please <a href='signup.php'>register</a></p>";
                 }
+        echo '</div>';
 ?>      
+      
  </body>
 </html>
-
- </body></html>
-

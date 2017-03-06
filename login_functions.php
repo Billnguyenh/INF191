@@ -1,5 +1,5 @@
 <?php
-include_once 'dbinfo.inc';
+include_once '../inc/dbinfo.inc';
 
 function sec_session_start() {
     $session_name = 'sec_session_id';   // Set a custom session name
@@ -30,9 +30,9 @@ function sec_session_start() {
  
 function login($email, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible. 
-    if ($stmt = $mysqli->prepare("SELECT PID, username, passwd 
-        FROM login
-       WHERE email = ?
+    if ($stmt = $mysqli->prepare("SELECT PID, username, `password` 
+        FROM `medularDB`.`login`
+        WHERE email = ?
         LIMIT 1")) {
         $stmt->bind_param('s', $email);  // Bind "$email" to parameter.
         $stmt->execute();    // Execute the prepared query.
@@ -41,12 +41,15 @@ function login($email, $password, $mysqli) {
         // get variables from result.
         $stmt->bind_result($user_id, $username, $db_password);
         $stmt->fetch();
+
+        if (mysqli_stmt_errno($stmt)) echo "Failed to find user " . mysqli_stmt_error($stmt);
  
         if ($stmt->num_rows == 1) {
             // If the user exists we check if the account is locked
             // from too many login attempts 
  
             if (checkbrute($user_id, $mysqli) == true) {
+                echo "check brute";
                 // Account is locked 
                 // Send an email to user saying their account is locked
                 return false;
@@ -55,6 +58,7 @@ function login($email, $password, $mysqli) {
                 // the password the user submitted. We are using
                 // the password_verify function to avoid timing attacks.
                 if (password_verify($password, $db_password)) {
+                    echo "password verify";
                     // Password is correct!
                     // Get the user-agent string of the user.
                     $user_browser = $_SERVER['HTTP_USER_AGENT'];
@@ -71,10 +75,11 @@ function login($email, $password, $mysqli) {
                     // Login successful.
                     return true;
                 } else {
+                    echo "in password not";
                     // Password is not correct
                     // We record this attempt in the database
                     $now = time();
-                    $mysqli->query("INSERT INTO login_attempts(user_id, time)
+                    $mysqli->query("INSERT INTO `medularDB`.`login_attempts`(user_id, `time`)
                                     VALUES ('$user_id', '$now')");
                     return false;
                 }
@@ -93,10 +98,10 @@ function checkbrute($user_id, $mysqli) {
     // All login attempts are counted from the past 2 hours. 
     $valid_attempts = $now - (2 * 60 * 60);
  
-    if ($stmt = $mysqli->prepare("SELECT time 
-                             FROM login_attempts 
+    if ($stmt = $mysqli->prepare("SELECT `time` 
+                             FROM `medularDB`.login_attempts 
                              WHERE user_id = ? 
-                            AND time > '$valid_attempts'")) {
+                            AND `time` > '$valid_attempts'")) {
         $stmt->bind_param('i', $user_id);
  
         // Execute the prepared query. 
@@ -125,7 +130,7 @@ function login_check($mysqli) {
         // Get the user-agent string of the user.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
  
-        if ($stmt = $mysqli->prepare("SELECT passwd 
+        if ($stmt = $mysqli->prepare("SELECT `password` 
                                       FROM login 
                                       WHERE PID = ? LIMIT 1")) {
             // Bind "$user_id" to parameter. 
