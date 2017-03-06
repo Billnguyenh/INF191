@@ -84,9 +84,7 @@ if (login_check($mysqli) == true) {
      </div><!-- /container --><!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-<<<<<<< HEAD
-    <script type="text/javascript">
-=======
+
    <script type="text/javascript">
       $(function() {
           $("body").on("input propertychange", ".floating-label-form-group", function(e) {
@@ -97,7 +95,6 @@ if (login_check($mysqli) == true) {
               $(this).removeClass("floating-label-form-group-with-focus");
           });
       });
->>>>>>> origin/master
       if (window.localStorage) {
         var email = document.getElementById('emailTxt');
 
