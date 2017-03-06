@@ -51,7 +51,7 @@ function RequestBreak (name, category, location, timestamp) {
   }
   this.getCategory = function () {
     return this.category;
-  }http://www.or-orchestrator.com/notifications.php
+  }
   this.getLocation = function() {
     return this.location;
   }
@@ -302,7 +302,7 @@ $(document).ready(function() {
     if (inQueueID === null && onBreakID === null) {
       //If user isn't inQueue or onBreak, add them to inQueue
       var reqBreak = new RequestBreak(user_self, category_self, task_self, current_timeStamp);
-      requestQueue.push(reqBreak)
+      requestQueue.push(reqBreak);
       //Hi Janay: add object in SQL database. Object will be
       //          name: user_self
       //          category: category_self

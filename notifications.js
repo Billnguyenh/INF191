@@ -17,7 +17,6 @@ Database Structure for System Activities JSON File
 
 */
 
-
 var notificationsData = JSON.parse(localStorage.getItem("notificationsData"));
 // ----OBJECT LIBRARY -----
 

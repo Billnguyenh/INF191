@@ -35,8 +35,9 @@ if (login_check($mysqli) == true) {
      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <!-[endif]-->
-   <script type="text/JavaScript" src="sha512.js"></script>
-   <script type="text/JavaScript" src="forms.js"></script>
+   <!--<script type="text/JavaScript" src="sha512.js"></script>-->
+   <!--<script type="text/JavaScript" src="forms.js"></script>-->
+
  </head>
 
  <body>
@@ -78,11 +79,13 @@ if (login_check($mysqli) == true) {
                 <input type="checkbox" value="remember-me">
                  Remember me
              </label>
-             <a class="btn btn-lg btn-primary btn-block" type="submit" href="http://www.or-orchestrator.com/notifications.php" id="signIn";">Sign in</a>
+             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" id="signIn";">Sign in</a>
              <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+   ================================================== --><!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 
    <script type="text/javascript">
@@ -96,14 +99,22 @@ if (login_check($mysqli) == true) {
           });
       });
       // Janay overhere! Change this userObject to be from db :) thanks
-      var userObject = <?php echo $GLOBALS['json'] ?>;
-    };
-      if (window.localStorage) {
-          localStorage.setItem("userObject", JSON.stringify(userObject));
-      }
+
 
         $("#signIn").click(function () {
-
+            var userObject =  var userObject = {
+        "first_name": "Samantha",
+        "last_name": "Applebaum",
+        "person_id": 4,
+        "email": "sappleba@uci.edu",
+        "department_id": 1,
+        "position": "CRNA",
+        "username": "sappleba",
+        "isAdmin": 1,
+    };
+            if (window.localStorage) {
+              localStorage.setItem("userObject", JSON.stringify(userObject));
+            }
         });
 
 
@@ -147,13 +158,11 @@ function InsertUser($connection,$email, $password) {
       echo '<p><span style="color: red;">Incorrect login info, please try again</span></p>';
       echo '</div>';
    }else{
-      alert("hi");
       $GLOBALS['json'] = json_encode($rows);
-      header('Location: http://www.or-orchestrator.com/notifications.php');
    }
 
 
-   if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
+   if (mysqli_stmt_errno($call)) echo "Failed to fetch user " . mysqli_stmt_error($call);
 }
 
 ?>

@@ -15,7 +15,6 @@
    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
    <link rel="stylesheet" type="text/css" href="main.css">
    <script src="jquery-3.1.1.min.js"></script>
-   <script src="notifications.js"></script>
 
    <!-- Custom styles for this template -->
 
@@ -24,10 +23,12 @@
      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <!-[endif]-->
+
  </head>
 
  <body>
-    <?php
+ 
+ <?php
 
   /* Connect to MySQL and select the database. */
   $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
@@ -47,7 +48,7 @@
     header('Refresh: 0');
   }
 
-
+  FetchNotifications($connection, 1, 2, 1);
 
 
   function FetchNotifications($connection, $department, $PID, $isAdmin) {
@@ -137,17 +138,15 @@
             <p class="text-muted">Copyright © 2017 - Team Medular</p>
       </div>
     </footer>
-
+   <script type="text/javascript">
+   if (window.localStorage) {
+        var notificationsData = <?php echo $GLOBALS['json'] ?>;
+        localStorage.setItem("notificationsData", JSON.stringify(notificationsData));
+   }
+    </script>
      <!-- Bootstrap core JavaScript, Placed at the end of the document so the pages load faster -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-   <script type="text/javascript">
-      window.onload = function() {
-        var notificationsData = <?php echo $GLOBALS['json'] ?>;
-        localStorage.setItem("notificationsData", JSON.stringify(notificationsData));
-    }
-      
-    </script>
    <script type="text/javascript" src="shared.js"></script>
    <script src="notifications.js"></script>
 
