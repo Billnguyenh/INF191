@@ -77,30 +77,49 @@
               <input type="text" name="UCINetID" class="form-control" placeholder="UCI Net ID" required="">
             </div>
          </div>
-         <br>
-         <select name="Department" class="form-control">
-          <option value="" selected>Select your Department</option>
-         <?php 
-              $sql = mysqli_query($connection, "SELECT DID, `name` FROM medularDB.tbl_department_types")  or die(mysql_error());  
-              while ($row = $sql->fetch_assoc()){
-                $id = $row['DID'];
-                $name = $row['name']; 
-                echo "<option value=".$id.">" . $name . "</option>";
-              }
-          ?>
-         </select></br>
-         <select name="Position" class="form-control">
-           <option value="" selected>Select your Position</option>
-           <option value="Attending">Attending</option>
-           <option value="CRNA">CRNA</option>
-           <option value="Resident">Resident</option>
-           <option value="Tech">Tech</option>
-         </select></br>
-         <select name="Admin" class="form-control">
-           <option value="" selected>Are you an Admin?</option>
-           <option value="1">Yes</option>
-           <option value="0">No</option>
-         </select></br>
+
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Department</label>
+              <select name="Department" class="form-control">
+                <option value="" selected>Select your Department</option>
+                <?php 
+                    $sql = mysqli_query($connection, "SELECT DID, `name` FROM medularDB.tbl_department_types")  or die(mysql_error());  
+                    while ($row = $sql->fetch_assoc()){
+                      $id = $row['DID'];
+                      $name = $row['name']; 
+                      echo "<option value=".$id.">" . $name . "</option>";
+                    }
+                ?>
+              </select>
+            </div>
+         </div>
+        
+        <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Position</label>
+                <select name="Position" class="form-control">
+                 <option value="" selected>Select your Position</option>
+                 <option value="Attending">Attending</option>
+                 <option value="CRNA">CRNA</option>
+                 <option value="Resident">Resident</option>
+                 <option value="Tech">Tech</option>
+               </select>
+            </div>
+         </div>
+
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Are you an Admin?</label>
+               <select name="Admin" class="form-control">
+                 <option value="" selected>Are you an Admin?</option>
+                 <option value="1">Yes</option>
+                 <option value="0">No</option>
+               </select>
+
+            </div>
+         </div>
+         
         <div class="row">
            <div class="form-group floating-label-form-group">
               <label>Password</label>
