@@ -12,8 +12,7 @@
    <title>OR-Orchestrator</title>
 
    <!-- Bootstrap core CSS -->
-   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
-
+   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet"><link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
    <!-- Custom styles for this template -->
    <link href="style-auto.css" rel="stylesheet">
 
@@ -52,10 +51,33 @@
 
      <form class="form-signin" role="form" action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
          <h2 class="form-signin-heading">Please Sign Up</h2>
-         <input type="text" name="FirstName" class="form-control" placeholder="First Name" required=""> </br>
-         <input type="text" name="LastName" class="form-control" placeholder="Last Name" required=""></br>
-         <input type="email" name="Email" class="form-control" placeholder="Email address" required="" autofocus=""></br>
-         <input type="text" name="UCINetID" class="form-control" placeholder="UCI Net ID" required=""></br>
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>First Name</label>
+              <input class="form-control" type="text" name="FirstName" placeholder="First Name" required="">
+               </div>
+         </div>
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Last Name</label>
+              <input type="text" name="LastName" class="form-control" placeholder="Last Name" required=""> 
+            </div>
+         </div>
+
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Email Address</label>
+               <input type="email" name="Email" class="form-control" placeholder="Email address" required="" autofocus="">
+            </div>
+         </div>
+
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>UCINetId</label>
+              <input type="text" name="UCINetID" class="form-control" placeholder="UCI Net ID" required="">
+            </div>
+         </div>
+         <br>
          <select name="Department" class="form-control">
           <option value="" selected>Select your Department</option>
          <?php 
@@ -79,12 +101,21 @@
            <option value="1">Yes</option>
            <option value="0">No</option>
          </select></br>
-         <input type="password" name="Password" class="form-control" placeholder="Password" required=""></br>
-         <input type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm Password" required="">
-         <span class="checkbox">
-              <input type="checkbox" value="remember-me">Remember me
-         </span>
-         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+        <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Password</label>
+              <input id="password" type="password" name="Password" class="form-control" placeholder="Password" required="">
+            </div>
+         </div>
+         <div class="row">
+           <div class="form-group floating-label-form-group">
+              <label>Confirm Password</label>
+              <input id="confirmPassword" type="password" name="ConfirmPassword" class="form-control" placeholder="Confirm Password" required="">
+            </div>
+         </div>
+         <span id='message'></span>
+         
+         <input class="btn btn-lg btn-primary btn-block" type="submit" value="Sign Up">
      </form>
 
    </div> <!-- /container -->
@@ -94,6 +125,26 @@
    <!-- Placed at the end of the document so the pages load faster -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+
+   <script type="text/javascript">
+    // Floating label headings for the contact form
+    $(function() {
+        $("body").on("input propertychange", ".floating-label-form-group", function(e) {
+            $(this).toggleClass("floating-label-form-group-with-value", !! $(e.target).val());
+        }).on("focus", ".floating-label-form-group", function() {
+            $(this).addClass("floating-label-form-group-with-focus");
+        }).on("blur", ".floating-label-form-group", function() {
+            $(this).removeClass("floating-label-form-group-with-focus");
+        });
+    });
+     $('#password, #confirmPassword').on('keyup', function () {
+        if ($('#password').val() == $('#confirmPassword').val()) {
+            $('#message').html('Passwords Match').css('color', 'green');
+        } else 
+            $('#message').html("Passwords don't match").css('color', 'red');
+    });
+
+   </script>
 
  
 </body></html>

@@ -59,21 +59,45 @@ if (login_check($mysqli) == true) {
 
 
      <div class="container">
-         <form class="form-signin" action="../inc/process_login.php" method="post" role="form">
+         <form class="form-signin" action="process_login.php" method="post" role="form">
              <h2 class="form-signin-heading">Please sign in</h2>
-             <input type="email" name="email" class="form-control" placeholder="Email address" autofocus="">
-             <input type="password" name="password" class="form-control" placeholder="Password">
-             <label style="padding-left: 25px;" class="checkbox">
-                 <input type="checkbox" value="remember-me">
+             <div class="row">
+               <div class="form-group floating-label-form-group">
+                  <label>Email Address</label>
+                   <input id="emailTxt" type="email" class="form-control" placeholder="Email address" autofocus="">
+                </div>
+             </div>
+             <div class="row">
+             <div class="form-group floating-label-form-group">
+                <label>Password</label>
+                 <input type="password" class="form-control" placeholder="Password">
+              </div>
+           </div>
+             
+             <label class="checkbox">
+                 <label style="padding-left: 25px;" class="checkbox">
                  Remember me
              </label>
-             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" onclick="formhash(this.form, this.form.password);" >Sign in</a>
-             <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
+             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" onclick="formhash(this.form, this.form.password);>Sign in</a>
+             <a class="btn btn-lg btn-primary btn-block" href="signup.html" role="button">Get Started&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
+<<<<<<< HEAD
     <script type="text/javascript">
+=======
+   <script type="text/javascript">
+      $(function() {
+          $("body").on("input propertychange", ".floating-label-form-group", function(e) {
+              $(this).toggleClass("floating-label-form-group-with-value", !! $(e.target).val());
+          }).on("focus", ".floating-label-form-group", function() {
+              $(this).addClass("floating-label-form-group-with-focus");
+          }).on("blur", ".floating-label-form-group", function() {
+              $(this).removeClass("floating-label-form-group-with-focus");
+          });
+      });
+>>>>>>> origin/master
       if (window.localStorage) {
         var email = document.getElementById('emailTxt');
 
