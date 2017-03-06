@@ -95,6 +95,7 @@ if (login_check($mysqli) == true) {
               $(this).removeClass("floating-label-form-group-with-focus");
           });
       });
+      // Janay overhere! Change this userObject to be from db :) thanks
       var userObject = {
         "first_name": "Samantha",
         "last_name": "Applebaum",
