@@ -42,13 +42,17 @@
 
   FetchNotifications($connection, 1, 2, 1);
 
+  if(strlen(trim($announcement)) > 0){
+    InsertAnnouncement($connection, 1, 2, $announcement, 1);
+  }
+
 
 
   function FetchNotifications($connection, $department, $PID, $isAdmin) {
 
-   /*Call the sproc called "insert_new_user*/
+  
    $call = mysqli_prepare($connection, 'CALL medularDB.fetch_notification_details(?,?,?)');
-   mysqli_stmt_bind_param($call, "iii", $department, $PID, $isAdmin);
+   mysqli_stmt_bind_param($call, "iii", $isAdmin, $PID, $$department);
    mysqli_stmt_execute($call);
    $result = mysqli_stmt_get_result($call);
 
@@ -65,7 +69,14 @@
 
   }
 
-  function InsertNotification($connection, $PID, $PID, $isAdmin) {
+  function InsertAnnouncement($connection, $department, $PID, $announcement, $isAdmin) {
+  
+  $call = mysqli_prepare($connection, 'CALL medularDB.insert_new_announcement(?,?,?,?)');
+   mysqli_stmt_bind_param($call, "iisi", $PID, $department, $announcement, $isAdmin);
+   mysqli_stmt_execute($call);
+
+
+   if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
 
   }
 
@@ -126,9 +137,7 @@
       </div>
     </footer>
 
-     <!-- Bootstrap core JavaScript
-<<<<<<< HEAD
-   ================================================== --><!-- Placed at the end of the document so the pages load faster -->
+     <!-- Bootstrap core JavaScript, Placed at the end of the document so the pages load faster -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
    <script type="text/javascript">
@@ -138,13 +147,8 @@
     }
       
     </script>
-=======
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
    <script type="text/javascript" src="shared.js"></script>
    <script src="notifications.js"></script>
->>>>>>> origin/master
 
  </body>
  </html>

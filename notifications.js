@@ -5,11 +5,10 @@ Database Structure for System Activities JSON File
  - receiver
  - Type:
      (Announcement, TaskAssignment, TaskCompleted, MeetingRequest, MeetingApproved, Break)
- - Freetext:
+ - Description:
  - Status
      (in-progress, complete, pending, approved, denied)
  - Timestamp
- - OR#
  - Location
  - Start Time
  - End Time
@@ -18,60 +17,7 @@ Database Structure for System Activities JSON File
 
 */
 
-/*var notificationsData =
-[
-  {
-    "sender": "Dr. Rajan",
-    "receiver": "Bill",
-    "type": "Announcement",
-    "freetext": "Free bagels in the breakroom!",
-    "status": "null",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "null",
-    "location": "null",
-    "starttime": "null",
-    "endtime": "null",
-    "priority": "null"
-  },
-  {
-    "sender": "Dr. Rajan",
-    "receiver": "Bill",
-    "type": "TaskAssignment",
-    "freetext": "null",
-    "status": "in-progress",
-    "timestamp": "2017-01-28 11:00:21",
-    "location": "OR5",
-    "starttime": "null",
-    "endtime": "null",
-    "priority": "null"
-  },
-  {
-    "sender": "Dr. Rajan",
-    "receiver": "Bill",
-    "type": "TaskAssignment",
-    "freetext": "null",
-    "status": "complete",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "12",
-    "location": "OR12",
-    "starttime": "null",
-    "endtime": "null",
-    "priority": "null"
-  },
-  {
-    "sender": "Bill",
-    "receiver": "Dr. Rajan",
-    "type": "TaskCompleted",
-    "freetext": "null",
-    "status": "null",
-    "timestamp": "2017-01-28 11:00:21",
-    "ornumber": "8",
-    "location": "OR8",
-    "starttime": "null",
-    "endtime": "null",
-    "priority": "null"
-  }
-]*/
+
 var notificationsData = JSON.parse(localStorage.getItem("notificationsData"));
 // ----OBJECT LIBRARY -----
 // Intitializing parameters are pulled directly from SQL database?
@@ -493,6 +439,8 @@ function buildNotifications(jsonStr) {
 }
 
 function displayNotifications(masterArray) {
+  $(".announceFeed").html('');
+
   var index = 0;
   for (i = 0; i < masterArray.length; i++) {
     var current = masterArray[i];
@@ -534,9 +482,9 @@ $(document).ready(function() {
 
   //Transform JSON --> Display UI
   var index = 0;
-  //HI JANAY: If you can, replace "testJson" with actual JSON pulled from database
-  // $.getJSON() will help pull from server
-  // $.parseJSON() will help convert pulled file into parsed string (similar to testJson's format)
+  
+
+
   var notificationsArray = buildNotifications(notificationsData);
   displayNotifications(notificationsArray);
 
@@ -547,24 +495,8 @@ $(document).ready(function() {
     var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
     var description = $("#announcement").val()
     appendAnnouncement(new Announcement(USER, description, timeStamp));
-    //HI JANAY: Append a Notification object to SQL table
-    /* Basically send
-    {
-      "sender": var USER,
-      "receiver": <all?> not sure how you want to do this,
-      "type": "Announcement",
-      "freetext": var freeText,
-      "status": "null",
-      "timestamp": var timeStamp,
-      "ornumber": "null",
-      "location": "null",
-      "starttime": "null",
-      "endtime": "null",
-      "priority": "null"
-    }
-    I'll update both our naming conventions if needed as the program develops.
-    Thanks!
-    */
+    window.location.reload();
+ 
   });
 
 
