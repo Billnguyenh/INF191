@@ -80,7 +80,7 @@
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li><a href="notifications.php"><span class="glyphicon glyphicon-bell"></span> Notifications</a></li>
-              <li><a href="breaks.html"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
+              <li><a href="breaks.php"><span class="glyphicon glyphicon-cutlery"></span> Breaks</a></li>
               <li class="active"><a href="orchestrator.php"><span class="glyphicon glyphicon-sort"></span> Orchestrator</a></li>           
               <li><a href="history.php"><span class="glyphicon glyphicon-time"></span> History</a></li>
               <li><a href="settings.php"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
@@ -261,24 +261,24 @@
             <p class="text-muted">Copyright © 2017 - Team Medular</p>
       </div>
     </footer>
-
-     <!-- Bootstrap core JavaScript
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <script type="text/javascript" src="shared.js"></script>
-    <script type="text/javascript" src="orchestrator.js"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
-
     <script type="text/javascript">
-    	window.onload = function() {
-   			var orchestratorData = <?php echo $GLOBALS['json'] ?>;
-    		localStorage.setItem("orchestratorData", JSON.stringify(orchestratorData));
-    		/*console.log(localStorage.getItem("orchestratorData"));*/
-		}
-    	
+    if (window.localStorage) {
+        var orchestratorData = <?php echo $GLOBALS['json'] ?>;
+        localStorage.setItem("orchestratorData", JSON.stringify(orchestratorData));
+      }
+      
     </script>
+     <!-- Bootstrap core JavaScript
+   ================================================== --><!-- Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+   <script type="text/javascript" src="shared.js"></script>
+   <script type="text/javascript" src="orchestrator.js"></script>
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.10.1/bootstrap-table.min.js"></script>
+
+
     
  </body>
  </html>

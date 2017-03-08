@@ -12,28 +12,28 @@ var testJson =
   {
     "name": "Sam Applebaum",
     "category": "Attending",
-    "ornum": "1,2,3",
+    "ornum": "101, 102, 103",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
   },
   {
     "name": "Bill Nguyen",
     "category": "Resident",
-    "ornum": "9",
+    "ornum": "109",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
   },
   {
     "name": "Dr. Janay",
     "category": "Attending",
-    "ornum": "4",
+    "ornum": "104",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
   },
   {
     "name": "Dr. Diddy Ries",
     "category": "Attending",
-    "ornum": "4",
+    "ornum": "104",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "break"
   }

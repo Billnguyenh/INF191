@@ -51,10 +51,13 @@
    
    <div class="container">
     <h1>Settings</h1>
-    <div class="row" id="profileInfo">
-     
+    <div class="container">
+        <div class="row" id="profileInfo">
+       
 
+      </div>
     </div>
+    
     
    </div>
    

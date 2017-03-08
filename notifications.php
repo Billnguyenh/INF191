@@ -15,7 +15,6 @@
    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
    <link rel="stylesheet" type="text/css" href="main.css">
    <script src="jquery-3.1.1.min.js"></script>
-   <script src="notifications.js"></script>
 
    <!-- Custom styles for this template -->
 
@@ -24,10 +23,12 @@
      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
    <!-[endif]-->
+
  </head>
 
  <body>
-    <?php
+ 
+ <?php
 
   /* Connect to MySQL and select the database. */
   $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
@@ -42,13 +43,18 @@
 
   FetchNotifications($connection, 1, 2, 1);
 
+  if(strlen(trim($announcement)) > 0){
+    InsertAnnouncement($connection, 1, 2, $announcement, 1);
+    header('Refresh: 0');
+  }
+
+  FetchNotifications($connection, 1, 2, 1);
 
 
   function FetchNotifications($connection, $department, $PID, $isAdmin) {
 
-   /*Call the sproc called "insert_new_user*/
    $call = mysqli_prepare($connection, 'CALL medularDB.fetch_notification_details(?,?,?)');
-   mysqli_stmt_bind_param($call, "iii", $department, $PID, $isAdmin);
+   mysqli_stmt_bind_param($call, "iii", $isAdmin, $PID, $$department);
    mysqli_stmt_execute($call);
    $result = mysqli_stmt_get_result($call);
 
@@ -65,7 +71,14 @@
 
   }
 
-  function InsertNotification($connection, $PID, $PID, $isAdmin) {
+  function InsertAnnouncement($connection, $department, $PID, $announcement, $isAdmin) {
+  
+  $call = mysqli_prepare($connection, 'CALL medularDB.insert_new_announcement(?,?,?,?)');
+   mysqli_stmt_bind_param($call, "iisi", $PID, $department, $announcement, $isAdmin);
+   mysqli_stmt_execute($call);
+
+
+   if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
 
   }
 
@@ -125,26 +138,17 @@
             <p class="text-muted">Copyright © 2017 - Team Medular</p>
       </div>
     </footer>
-
-     <!-- Bootstrap core JavaScript
-<<<<<<< HEAD
-   ================================================== --><!-- Placed at the end of the document so the pages load faster -->
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
    <script type="text/javascript">
-      window.onload = function() {
+   if (window.localStorage) {
         var notificationsData = <?php echo $GLOBALS['json'] ?>;
         localStorage.setItem("notificationsData", JSON.stringify(notificationsData));
-    }
-      
+   }
     </script>
-=======
-   ================================================== --><!-- Placed at the end of the document so the pages load faster --><script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+     <!-- Bootstrap core JavaScript, Placed at the end of the document so the pages load faster -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
    <script type="text/javascript" src="shared.js"></script>
    <script src="notifications.js"></script>
->>>>>>> origin/master
 
  </body>
  </html>
