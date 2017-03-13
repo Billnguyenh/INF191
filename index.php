@@ -104,18 +104,20 @@ if (login_check($mysqli) == true) {
 
         $("#signIn").click(function () {
             var userObject = {
-        "first_name": "Samantha",
-        "last_name": "Applebaum",
-        "person_id": 4,
-        "email": "sappleba@uci.edu",
-        "department_id": 1,
-        "position": "CRNA",
-        "username": "sappleba",
-        "isAdmin": 1,
-    };
+              "first_name": "Samantha",
+              "last_name": "Applebaum",
+              "person_id": 4,
+              "email": "sappleba@uci.edu",
+              "department_id": 1,
+              "position": "CRNA",
+              "username": "sappleba",
+              "isAdmin": 1,
+          };
             if (window.localStorage) {
               localStorage.setItem("userObject", JSON.stringify(userObject));
             }
+
+            alert("Welcome " + userObject.first_name + "!");
         });
 
 
