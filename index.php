@@ -79,7 +79,7 @@ if (login_check($mysqli) == true) {
                 <input type="checkbox" value="remember-me">
                  Remember me
              </label>
-             <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+             <button type="submit" id="signIn" class="btn btn-lg btn-primary btn-block">Sign in</button>
              <!--<a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" id="signIn";">Sign in</a>-->
              <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
