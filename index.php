@@ -61,25 +61,26 @@ if (login_check($mysqli) == true) {
 
 
      <div class="container">
-         <form class="form-signin" action="process_login.php" method="post" role="form">
+         <form class="form-signin" action="notifications.php" method="post" role="form">
              <h2 class="form-signin-heading">Please sign in</h2>
              <div class="row">
                <div class="form-group floating-label-form-group">
                   <label>Email Address</label>
-                   <input id="emailTxt" name="Email" type="email" class="form-control" placeholder="Email address" autofocus="">
+                   <input id="emailTxt" name="Email" type="email" class="form-control" placeholder="Email address" autofocus="" required>
                 </div>
              </div>
              <div class="row">
              <div class="form-group floating-label-form-group">
                 <label>Password</label>
-                 <input type="password" name="Password" class="form-control" placeholder="Password">
+                 <input type="password" name="Password" class="form-control" placeholder="Password" required>
               </div>
            </div>
              <label style="padding-left: 25px;" class="checkbox">
                 <input type="checkbox" value="remember-me">
                  Remember me
              </label>
-             <a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" id="signIn";">Sign in</a>
+             <button type="submit" class="btn btn-lg btn-primary btn-block">Sign in</button>
+             <!--<a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" id="signIn";">Sign in</a>-->
              <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
