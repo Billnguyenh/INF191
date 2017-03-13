@@ -48,6 +48,7 @@
   }
 ?>
    <div class="container">
+    <img id="logo" src="img/medularlogo.png" class="img-responsive">
 
      <form class="form-signin" role="form" action="<?PHP echo $_SERVER['SCRIPT_NAME'] ?>" method="POST">
          <h2 class="form-signin-heading">Please Sign Up</h2>

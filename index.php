@@ -61,6 +61,8 @@ if (login_check($mysqli) == true) {
 
 
      <div class="container">
+        <img id="logo" src="img/medularlogo.png" class="img-responsive">
+
          <form class="form-signin" action="notifications.php" method="post" role="form">
              <h2 class="form-signin-heading">Please sign in</h2>
              <div class="row">
@@ -80,6 +82,7 @@ if (login_check($mysqli) == true) {
                  Remember me
              </label>
              <button type="submit" id="signIn" class="btn btn-lg btn-primary btn-block">Sign in</button>
+
              <!--<a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" id="signIn";">Sign in</a>-->
              <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
          </form>
