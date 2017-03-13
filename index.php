@@ -66,13 +66,13 @@ if (login_check($mysqli) == true) {
              <div class="row">
                <div class="form-group floating-label-form-group">
                   <label>Email Address</label>
-                   <input id="emailTxt" name="Email" type="email" class="form-control" placeholder="Email address" autofocus="">
+                   <input id="emailTxt" name="Email" type="email" class="form-control" placeholder="Email address" autofocus="" required="">
                 </div>
              </div>
              <div class="row">
              <div class="form-group floating-label-form-group">
                 <label>Password</label>
-                 <input type="password" name="Password" class="form-control" placeholder="Password">
+                 <input type="password" name="Password" class="form-control" placeholder="Password" required="">
               </div>
            </div>
              <label style="padding-left: 25px;" class="checkbox">
@@ -103,18 +103,20 @@ if (login_check($mysqli) == true) {
 
         $("#signIn").click(function () {
             var userObject = {
-        "first_name": "Samantha",
-        "last_name": "Applebaum",
-        "person_id": 4,
-        "email": "sappleba@uci.edu",
-        "department_id": 1,
-        "position": "CRNA",
-        "username": "sappleba",
-        "isAdmin": 1,
-    };
+              "first_name": "Samantha",
+              "last_name": "Applebaum",
+              "person_id": 4,
+              "email": "sappleba@uci.edu",
+              "department_id": 1,
+              "position": "CRNA",
+              "username": "sappleba",
+              "isAdmin": 1,
+          };
             if (window.localStorage) {
               localStorage.setItem("userObject", JSON.stringify(userObject));
             }
+
+            alert("Welcome " + userObject.first_name + "!");
         });
 
 
