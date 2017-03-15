@@ -92,7 +92,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-            <a class="navbar-brand" href="#">Medular</a>
+            <a class="navbar-brand"  href="notifications.php"><img id="navbar-logo" src="img/logo33.png">
           </div>
 
           <div id="navbar" class="collapse navbar-collapse">

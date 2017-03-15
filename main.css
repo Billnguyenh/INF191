@@ -5,6 +5,12 @@ html {
 body {
     margin-bottom: 60px;
 }
+
+#navbar-logo{
+  width:190px; 
+  margin-top: -10px;
+
+}
 .footer {
     position: absolute;
     bottom:0;
@@ -51,4 +57,9 @@ body {
 
 #on-break-section {
   padding-bottom: 10%;
+}
+
+#profileInfo {
+  padding-left: 30px;
+  padding-top: 20px;
 }
