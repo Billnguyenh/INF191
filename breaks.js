@@ -6,44 +6,44 @@ OR#(s)
 TimeStamp
 Type: queue, break
 */
-
+/*
 var testJson =
 [
   {
     "name": "Sam Applebaum",
     "category": "Attending",
-    "ornum": "101, 102, 103",
+    "room": "101, 102, 103",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
   },
   {
     "name": "Bill Nguyen",
     "category": "Resident",
-    "ornum": "109",
+    "room": "109",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
   },
   {
     "name": "Dr. Janay",
     "category": "Attending",
-    "ornum": "104",
+    "room": "104",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "queue"
   },
   {
     "name": "Dr. Diddy Ries",
     "category": "Attending",
-    "ornum": "104",
+    "room": "104",
     "timestamp": "2017, 02, 27, 00, 00, 00",
     "type": "break"
   }
-]
+] */
 
 
-function RequestBreak (name, category, ornum, timestamp) {
+function RequestBreak (name, category, room, timestamp) {
   this.name = name;
   this.category = category;
-  this.ornum = ornum;
+  this.room = room;
   this.timeStamp = timestamp;
 
   this.getName = function () {
@@ -52,8 +52,8 @@ function RequestBreak (name, category, ornum, timestamp) {
   this.getCategory = function () {
     return this.category;
   }
-  this.getOrNum = function() {
-    return this.ornum;
+  this.getRoom = function() {
+    return this.room;
   }
   this.getWaiting = function() {
 
@@ -61,10 +61,10 @@ function RequestBreak (name, category, ornum, timestamp) {
   }
 }
 
-function OnBreak (name, category, ornum, timestamp) {
+function OnBreak (name, category, room, timestamp) {
   this.name = name;
   this.category = category;
-  this.ornum = ornum;
+  this.room = room;
   this.timeStamp = timestamp;
 
   this.getName = function () {
@@ -73,27 +73,27 @@ function OnBreak (name, category, ornum, timestamp) {
   this.getCategory = function () {
     return this.category;
   }
-  this.getOrNum = function() {
-    return this.ornum;
+  this.getRoom = function() {
+    return this.room;
   }
   this.getTimeElapsed = function() {
     return "00:00:00"; //CHANGE
   }
   this.print = function () {
-    return "name: " + this.name + " for OR " + this.ornum;
+    return "name: " + this.name + " for OR " + this.room;
   }
 }
 
 function appendRequestBreak(requestBreak, index) {
   name = requestBreak.getName();
   category = requestBreak.getCategory();
-  ornum = requestBreak.getOrNum();
+  room = requestBreak.getRoom();
   waitTime = requestBreak.getWaiting();
   $('#queue').append("" +
     "<tr class='break-item'> " +
       "<td>" + name + "</td> " +
       "<td>" + category + "</td> " +
-      "<td>" + ornum +"</td> " +
+      "<td>" + room +"</td> " +
       "<td>" + waitTime + "</td> " +
     "</tr> "
   )
@@ -101,13 +101,13 @@ function appendRequestBreak(requestBreak, index) {
 function appendSelfRequestBreak(requestBreak, index) {
   name = requestBreak.getName();
   category = requestBreak.getCategory();
-  ornum = requestBreak.getOrNum();
+  room = requestBreak.getRoom();
   waitTime = requestBreak.getWaiting();
   $('#queue').append("" +
     "<tr class='break-item success'> " +
       "<td>" + name + "</td> " +
       "<td>" + category + "</td> " +
-      "<td>" + ornum +"</td> " +
+      "<td>" + room +"</td> " +
       "<td>" + waitTime + "</td> " +
     "</tr> "
   )
@@ -116,13 +116,13 @@ function appendSelfRequestBreak(requestBreak, index) {
 function appendOnBreak(onBreak, index) {
   name = onBreak.getName();
   category = onBreak.getCategory();
-  ornum = onBreak.getOrNum();
+  room = onBreak.getRoom();
   elapsed = onBreak.getTimeElapsed();
   $('#on-break').append("" +
     "<tr class='break-item'> " +
       "<td>" + name + "</td> " +
       "<td>" + category + "</td> " +
-      "<td>" + ornum +"</td> " +
+      "<td>" + room +"</td> " +
       "<td>" + elapsed + "</td> " +
     "</tr> "
   )
@@ -131,13 +131,13 @@ function appendOnBreak(onBreak, index) {
 function appendSelfOnBreak(onBreak, index) {
   name = onBreak.getName();
   category = onBreak.getCategory();
-  ornum = onBreak.getOrNum();
+  room = onBreak.getRoom();
   elapsed = onBreak.getTimeElapsed();
   $('#on-break').append("" +
     "<tr class='break-item success'> " +
       "<td>" + name + "</td> " +
       "<td>" + category + "</td> " +
-      "<td>" + ornum +"</td> " +
+      "<td>" + room +"</td> " +
       "<td>" + elapsed + "</td> " +
     "</tr> "
   )
@@ -149,7 +149,7 @@ function buildRequestQueue(jsonStr) {
   for (i = 0; i < jsonStr.length; i++) {
     var current = jsonStr[i];
     if (current.type === "queue") {
-      requestQueue[index] = new RequestBreak (current.name, current.category, current.ornum, current.timestamp)
+      requestQueue[index] = new RequestBreak (current.name, current.category, current.room, current.timestamp)
       index++;
     }
   }
@@ -162,7 +162,7 @@ function buildOnBreak(jsonStr) {
   for (i = 0; i < jsonStr.length; i++) {
     var current = jsonStr[i];
     if (current.type === "break") {
-      onBreak[index] = new OnBreak (current.name, current.category, current.ornum, current.timestamp)
+      onBreak[index] = new OnBreak (current.name, current.category, current.room, current.timestamp)
       index++;
     }
   }
@@ -272,7 +272,7 @@ $(document).ready(function() {
   //          the user database or local storage.
   var user_self = "Sam Applebaum";
   var category_self = "Attending";
-  var task_self = "2,3,5";
+  var task_self = "102, 103, 105";
   var current_timeStamp = $.now();
   var is_floater = false;
 
@@ -306,7 +306,7 @@ $(document).ready(function() {
       //Hi Janay: add object in SQL database. Object will be
       //          name: user_self
       //          category: category_self
-      //          ornum: task_self
+      //          room: task_self
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: queue
 
@@ -340,7 +340,7 @@ $(document).ready(function() {
       //Hi Janay: add break object in SQL database. Object will be
       //          name: user_self
       //          category: category_self
-      //          ornum: task_self
+      //          room: task_self
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: break
       //              (this will be the same code as the first database add. Only "type" value is different)
@@ -363,7 +363,7 @@ $(document).ready(function() {
       //then      Add break object in Database
       //          name: user_self
       //          category: category_self
-      //          ornum: task_self
+      //          room: task_self
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: break
 
@@ -381,7 +381,7 @@ $(document).ready(function() {
       //Hi Janay: add object in SQL database. Object will be
       //          name: user_self
       //          category: category_self
-      //          ornum: task_self
+      //          room: task_self
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: break
 

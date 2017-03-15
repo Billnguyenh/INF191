@@ -1,3 +1,4 @@
+<?php include "../inc/dbinfo.inc"; ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -23,6 +24,42 @@
      <!-[endif]-->
    </head>
    <body>
+   <?php
+
+  /* Connect to MySQL and select the database. */
+  $connection = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD);
+
+  if (mysqli_connect_errno()) echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+  $database = mysqli_select_db($connection, DB_DATABASE);
+
+  /* If input fields are populated, fetch schedule */
+  $json = "";
+
+  FetchBreak($connection, 2, 1);
+
+
+
+  function FetchBreak($connection, $PID, $isAdmin) {
+
+   /*Call the sproc called "insert_new_user*/
+   $call = mysqli_prepare($connection, 'CALL medularDB.fetch_break_details(?,?)');
+   mysqli_stmt_bind_param($call, "ii", $PID, $isAdmin);
+   mysqli_stmt_execute($call);
+   $result = mysqli_stmt_get_result($call);
+
+   $rows = array();
+   while($r = mysqli_fetch_assoc($result)){
+    $rows[] = $r;
+   }
+
+   $GLOBALS['json'] = json_encode($rows);
+
+
+   if (mysqli_stmt_errno($call)) echo "Failed to add user " . mysqli_stmt_error($call);
+}
+
+?>
      <nav class="navbar navbar-inverse navbar-static-top">
         <div class="container">
           <div class="navbar-header">
@@ -91,6 +128,12 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="breaks.js"></script>
+  <script type="text/javascript">
+    if (window.localStorage) {
+        var testJson = <?php echo $GLOBALS['json'] ?>;
+        localStorage.setItem("testJson", JSON.stringify(testJson));
+   }
+  </script>
 
   </body>
 </html>
