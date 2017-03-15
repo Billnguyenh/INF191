@@ -13,32 +13,37 @@ var testJson =
     "name": "Sam Applebaum",
     "category": "Attending",
     "room": "101, 102, 103",
-    "timestamp": "2017, 02, 27, 00, 00, 00",
+    "timestamp": "2017-03-15 11:00:00",
     "type": "queue"
   },
   {
     "name": "Bill Nguyen",
     "category": "Resident",
     "room": "109",
-    "timestamp": "2017, 02, 27, 00, 00, 00",
+    "timestamp": "2017-03-15 11:00:00",
     "type": "queue"
   },
   {
     "name": "Dr. Janay",
     "category": "Attending",
     "room": "104",
-    "timestamp": "2017, 02, 27, 00, 00, 00",
+    "timestamp": "2017-03-15 11:00:00",
     "type": "queue"
   },
   {
     "name": "Dr. Diddy Ries",
     "category": "Attending",
     "room": "104",
-    "timestamp": "2017, 02, 27, 00, 00, 00",
+    "timestamp": "2017-03-15 11:00:00",
     "type": "break"
   }
 ] */
 
+function millisToMinutesAndSeconds(millis) {
+  var minutes = Math.floor(millis / 60000);
+  var seconds = ((millis % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
 
 function RequestBreak (name, category, room, timestamp) {
   this.name = name;
@@ -56,8 +61,21 @@ function RequestBreak (name, category, room, timestamp) {
     return this.room;
   }
   this.getWaiting = function() {
-
-    return "00:00"; //CHANGE
+    if (this.timeStamp instanceof Date) {
+      var timeCreated = this.timeStamp;
+      var now = new Date(Date.now());
+      var difference = Math.abs(now.getTime() - timeCreated.getTime());
+      return millisToMinutesAndSeconds(difference);
+    }
+    else if (typeof this.timeStamp === 'string') {
+      var timeCreated = new Date(Date.parse(this.timeStamp));
+      var now = new Date(Date.now());
+      var difference = Math.abs(now.getTime() - timeCreated.getTime());
+      return millisToMinutesAndSeconds(difference);
+    }
+    else {
+      return timestamp + " -- Incompatible TimeStamp Input Type"; //CHANGE
+    }
   }
 }
 
@@ -77,10 +95,21 @@ function OnBreak (name, category, room, timestamp) {
     return this.room;
   }
   this.getTimeElapsed = function() {
-    return "00:00:00"; //CHANGE
-  }
-  this.print = function () {
-    return "name: " + this.name + " for OR " + this.room;
+    if (this.timeStamp instanceof Date) {
+      var timeCreated = this.timeStamp;
+      var now = new Date(Date.now());
+      var difference = Math.abs(now.getTime() - timeCreated.getTime());
+      return millisToMinutesAndSeconds(difference);
+    }
+    else if (typeof this.timeStamp === 'string') {
+      var timeCreated = new Date(Date.parse(this.timeStamp));
+      var now = new Date(Date.now());
+      var difference = Math.abs(now.getTime() - timeCreated.getTime());
+      return millisToMinutesAndSeconds(difference);
+    }
+    else {
+      return timestamp + " -- Incompatible TimeStamp Input Type"; //CHANGE
+    }
   }
 }
 
@@ -273,9 +302,9 @@ $(document).ready(function() {
   var user_self = "Sam Applebaum";
   var category_self = "Attending";
   var task_self = "102, 103, 105";
-  var current_timeStamp = $.now();
   var is_floater = false;
 
+// --------- PAGE LOAD UP ---------------//
 
   //Arrays of Break Items
   //Hi Janay: testJson is the parsed string version of the json file
@@ -295,10 +324,13 @@ $(document).ready(function() {
   //print from JSON, LOAD PAGE
   printRequestQueue(requestQueue, user_self);
   printOnBreak(onBreak, user_self);
-  var date = new Date();
+
+  // --------- END OF PAGE LOAD UP ---------------//
+
 
   //REQUEST BREAK BUTTON FUNCTION
   $("#request-break-btn").click(function() {
+    var current_timeStamp = new Date(Date.now());
     if (inQueueID === null && onBreakID === null) {
       //If user isn't inQueue or onBreak, add them to inQueue
       var reqBreak = new RequestBreak(user_self, category_self, task_self, current_timeStamp);
@@ -310,10 +342,11 @@ $(document).ready(function() {
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: queue
 
-      eraseSelfQueue();
-      printRequestQueue(requestQueue, user_self);
-      inQueueID = checkSelfQueueID(requestQueue, user_self);
-      setBtnStates(inQueueID, onBreakID);
+  //REPLACE WITH REFRESH PAGE. PAGE LOAD UP DOES THIS
+      //eraseSelfQueue();
+      //printRequestQueue(requestQueue, user_self);
+      //inQueueID = checkSelfQueueID(requestQueue, user_self);
+      //setBtnStates(inQueueID, onBreakID);
 
     }
     else if (inQueueID != null) {
@@ -324,15 +357,17 @@ $(document).ready(function() {
       //          if (name == name_self && category == category_self)
       //              remove(break item)
 
-      eraseSelfQueue();
-      printRequestQueue(requestQueue, user_self);
-      inQueueID = checkSelfQueueID(requestQueue, user_self);
-      setBtnStates(inQueueID, onBreakID);
+  //REPLACE WITH REFRESH PAGE. PAGE LOAD UP DOES THIS
+      //eraseSelfQueue();
+      //printRequestQueue(requestQueue, user_self);
+      //inQueueID = checkSelfQueueID(requestQueue, user_self);
+      //setBtnStates(inQueueID, onBreakID);
     }
   });
 
   //SELF BREAK BUTTON FUNCTION
   $("#self-break-btn").click(function() {
+    var current_timeStamp = new Date(Date.now());
     if (onBreakID === null && inQueueID === null) {
       //If user isn't inQueue or onBreak, add them to onBreak
       var takeBreak = new OnBreak(user_self, category_self, task_self, current_timeStamp);
@@ -367,13 +402,14 @@ $(document).ready(function() {
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: break
 
-      eraseSelfQueue();
-      eraseOnBreak();
-      printRequestQueue(requestQueue, user_self);
-      printOnBreak(onBreak, user_self);
-      inQueueID = checkSelfQueueID(requestQueue, user_self);
-      onBreakID = checkOnBreakID(onBreak, user_self);
-      setBtnStates(inQueueID, onBreakID);
+  //REPLACE WITH REFRESH PAGE. PAGE LOAD UP DOES THIS
+      //eraseSelfQueue();
+      //eraseOnBreak();
+      //printRequestQueue(requestQueue, user_self);
+      //printOnBreak(onBreak, user_self);
+      //inQueueID = checkSelfQueueID(requestQueue, user_self);
+      //onBreakID = checkOnBreakID(onBreak, user_self);
+      //setBtnStates(inQueueID, onBreakID);
     }
     else if (onBreakID != null) {
       //if self_user is currently onBreak
@@ -385,10 +421,12 @@ $(document).ready(function() {
       //          timestamp: current_timeStamp (this is the timestamp of when request/break item is created)
       //          type: break
 
-      eraseOnBreak();
-      printOnBreak(onBreak, user_self);
-      onBreakID = checkOnBreakID(onBreak, user_self);
-      setBtnStates(inQueueID, onBreakID);
+
+  //REPLACE WITH REFRESH PAGE. PAGE LOAD UP DOES THIS
+      //eraseOnBreak();
+      //printOnBreak(onBreak, user_self);
+      //onBreakID = checkOnBreakID(onBreak, user_self);
+      //setBtnStates(inQueueID, onBreakID);
     }
   });
 });
