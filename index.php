@@ -1,16 +1,4 @@
-<?php
-include "../inc/dbinfo.inc";
-/*include_once '../inc/login_functions.php';
-
-sec_session_start();
-
-if (login_check($mysqli) == true) {
-    $logged = 'in';
-} else {
-    $logged = 'out';
-
-}*/
-?>
+<?php include "../inc/dbinfo.inc";?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +43,7 @@ if (login_check($mysqli) == true) {
    
 
         if (strlen($email) || strlen($password)) {
-          InsertUser($connection, $email, $password);
+          FetchUser($connection, $email, $password);
         }
      ?>
 
@@ -84,7 +72,7 @@ if (login_check($mysqli) == true) {
              <button type="submit" id="signIn" class="btn btn-lg btn-primary btn-block">Sign in</button>
 
              <!--<a class="btn btn-lg btn-primary btn-block" type="submit" href="notifications.php" id="signIn";">Sign in</a>-->
-             <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Get Started&nbsp;</a>
+             <a class="btn btn-lg btn-primary btn-block" href="signup.php" role="button">Register&nbsp;</a>
          </form>
      </div><!-- /container --><!-- Bootstrap core JavaScript
    ================================================== --><!-- Placed at the end of the document so the pages load faster -->
@@ -106,16 +94,16 @@ if (login_check($mysqli) == true) {
 
 
         $("#signIn").click(function () {
-            var userObject = <?php echo $GLOBALS['json'] ?>;
-            // var userObject = {
-            //   "first_name": "Samantha",
-            //   "last_name": "Applebaum",
-            //   "person_id": 4,
-            //   "email": "sappleba@uci.edu",
-            //   "department_id": 1,
-            //   "position": "CRNA",
-            //   "username": "sappleba",
-            //   "isAdmin": 1,
+
+            var userObject = {
+              "first_name": "Samantha",
+              "last_name": "Applebaum",
+              "person_id": 4,
+              "email": "sappleba@uci.edu",
+              "department_id": 1,
+              "position": "CRNA",
+              "username": "sappleba",
+              "isAdmin": 1,
           };
             if (window.localStorage) {
               localStorage.setItem("userObject", JSON.stringify(userObject));
@@ -146,7 +134,7 @@ if (login_check($mysqli) == true) {
 
 <?php
 
-function InsertUser($connection,$email, $password) {
+function FetchUser($connection,$email, $password) {
 
    /*Call the sproc called "insert_new_user*/
    $call = mysqli_prepare($connection, 'CALL medularDB.fetch_user_details(?,?)');
@@ -159,6 +147,8 @@ function InsertUser($connection,$email, $password) {
    while($r = mysqli_fetch_assoc($result)){
     $rows[] = $r;
    }
+
+   $GLOBALS['json'] = json_encode($rows);
 
    if(empty($rows)){
       echo '<div style="text-align: center;">';
