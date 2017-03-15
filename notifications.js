@@ -550,9 +550,15 @@ Notifications
 
 */
 
+var userObject;
+
 if (window.localStorage) {
-  var userObject = JSON.parse(localStorage.getItem("userObject"));
+  userObject = JSON.parse(localStorage.getItem("userObject"));
   $('#userName').html('<span class="glyphicon glyphicon-user"></span> ' + userObject.username);
 
+}
+
+if (userObject.isAdmin === 0) {
+  $('#postBar').hide();
 }
 
