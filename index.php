@@ -90,12 +90,11 @@
               $(this).removeClass("floating-label-form-group-with-focus");
           });
       });
-      // Janay overhere! Change this userObject to be from db :) thanks
 
 
         $("#signIn").click(function () {
-
-            var userObject = {
+          //Janay replace userList with the call from db 
+            var userList = [{
               "first_name": "Samantha",
               "last_name": "Applebaum",
               "person_id": 4,
@@ -104,7 +103,8 @@
               "position": "CRNA",
               "username": "sappleba",
               "isAdmin": 1,
-          };
+            }];
+            var userObject = userList[0];
             if (window.localStorage) {
               localStorage.setItem("userObject", JSON.stringify(userObject));
             }
