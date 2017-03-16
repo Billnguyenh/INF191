@@ -480,7 +480,7 @@ $(document).ready(function() {
 
   //Transform JSON --> Display UI
   var index = 0;
-  
+
 
 
   var notificationsArray = buildNotifications(notificationsData);
@@ -491,10 +491,10 @@ $(document).ready(function() {
   //Post Announcement Admin Function
   $("#postBtn").click(function () {
 
+    //May not be needed. Handled by PHP.
     var date = new Date();
     var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
     var description = $("#announcement").val()
-    appendAnnouncement(new Announcement(USER, description, timeStamp));
 
   });
 
@@ -561,4 +561,3 @@ if (window.localStorage) {
 if (userObject.isAdmin === 0) {
   $('#postBar').hide();
 }
-

@@ -225,27 +225,33 @@ function printOnBreak(array, user_self) {
   }
 }
 
-
 function setBtnStates (inQueueID, onBreakID) {
   var requestBtn = $("#request-break-btn");
+  var selfBreakBtn = $("#self-break-btn");
   if (inQueueID === null) {
     requestBtn.text(requestBtn.data("text-original"));
+    requestBtn.attr('class', 'btn btn-primary');
+    requestBtn.show()
   }
   else if (inQueueID != null) {
     requestBtn.data("text-original", requestBtn.text());
     requestBtn.text(requestBtn.data("text-swap"));
+    requestBtn.attr('class', 'btn btn-secondary');
   }
-
-  var selfBreakBtn = $("#self-break-btn");
   if (onBreakID === null) {
     selfBreakBtn.text(selfBreakBtn.data("text-original"));
+    selfBreakBtn.attr('class', 'btn btn-primary');
+    requestBtn.show();
   }
   else if (onBreakID != null) {
     selfBreakBtn.data("text-original", selfBreakBtn.text());
     selfBreakBtn.text(selfBreakBtn.data("text-swap"));
+    selfBreakBtn.attr('class', 'btn btn-info');
+    requestBtn.attr('class', 'btn btn-secondary');
+    requestBtn.hide();
   }
-
 }
+
 
 //Checks all SelfQueue items in array, if user_self is in queue, returns Index of break item
 function checkSelfQueueID (array, user_self) {
