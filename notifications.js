@@ -479,17 +479,7 @@ function createAnnouncement(){}
 
 $(document).ready(function() {
   //User Info, Possibly Pulled from Local Storage
-  var userObject;
 
-  if (window.localStorage) {
-    userObject = JSON.parse(localStorage.getItem("userObject"));
-    $('#userName').html('<span class="glyphicon glyphicon-user"></span> ' + userObject.username);
-
-  }
-
-  if (userObject.isAdmin !== 1) {
-    $('#postBar').hide();
-  }
 
   var USER = userObject.first_name + ' ' + userObject.last_name;
   var IS_ADMIN = userObject.isAdmin;
@@ -522,7 +512,17 @@ $(document).ready(function() {
 
 });
 
+  var userObject;
 
+  if (window.localStorage) {
+    userObject = JSON.parse(localStorage.getItem("userObject"));
+    $('#userName').html('<span class="glyphicon glyphicon-user"></span> ' + userObject.username);
+
+  }
+
+  if (userObject.isAdmin !== 1) {
+    $('#postBar').hide();
+  }
 
 // LOGIC
 //Json file will be a result of a SQL database pull request of
