@@ -17,7 +17,11 @@ Database Structure for System Activities JSON File
 
 */
 
-var notificationsData = JSON.parse(localStorage.getItem("notificationsData"));
+var notificationsData = JSON.parse(localStorage.getItem("notificationsData")).filter(function(data) {
+  data.timestamp = new Date(Date.parse(data.timestamp.replace('-', '/', 'g')));
+  return data;
+});
+
 // ----OBJECT LIBRARY -----
 
 //Shows on both User and Admin
@@ -475,8 +479,20 @@ function createAnnouncement(){}
 
 $(document).ready(function() {
   //User Info, Possibly Pulled from Local Storage
-  var USER = "CURRENT_ADMIN";
-  var IS_ADMIN = true;
+  var userObject;
+
+  if (window.localStorage) {
+    userObject = JSON.parse(localStorage.getItem("userObject"));
+    $('#userName').html('<span class="glyphicon glyphicon-user"></span> ' + userObject.username);
+
+  }
+
+  if (userObject.isAdmin !== 1) {
+    $('#postBar').hide();
+  }
+
+  var USER = userObject.first_name + ' ' + userObject.last_name;
+  var IS_ADMIN = userObject.isAdmin;
 
   //Transform JSON --> Display UI
   var index = 0;
@@ -490,11 +506,13 @@ $(document).ready(function() {
 
   //Post Announcement Admin Function
   $("#postBtn").click(function () {
-
-    //May not be needed. Handled by PHP.
-    var date = new Date();
-    var timeStamp = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + " note: format of stamp TBD";
     var description = $("#announcement").val()
+    if(description.length > 0){
+      var timestamp = new Date(Date.now());
+      var newAnnouncement = new Announcement(USER, description, timestamp);
+      appendAnnouncement(newAnnouncement, notificationsArray.length + 1);
+      console.log(newAnnouncement);
+    }
 
   });
 
@@ -549,15 +567,3 @@ Notifications
   - Announcements
 
 */
-
-var userObject;
-
-if (window.localStorage) {
-  userObject = JSON.parse(localStorage.getItem("userObject"));
-  $('#userName').html('<span class="glyphicon glyphicon-user"></span> ' + userObject.username);
-
-}
-
-if (userObject.isAdmin === 0) {
-  $('#postBar').hide();
-}

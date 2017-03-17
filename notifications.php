@@ -14,7 +14,6 @@
    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/spacelab/bootstrap.min.css" rel="stylesheet" data-mbcode_theme="true">
    <link rel="stylesheet" type="text/css" href="main.css">
-   <script src="jquery-3.1.1.min.js"></script>
 
    <!-- Custom styles for this template -->
 
