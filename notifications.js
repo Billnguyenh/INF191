@@ -481,8 +481,8 @@ $(document).ready(function() {
   //User Info, Possibly Pulled from Local Storage
 
 
-  var USER = userObject.first_name + ' ' + userObject.last_name;
-  var IS_ADMIN = userObject.isAdmin;
+  var USER = 'current_Admin';
+  var IS_ADMIN = true;
 
   //Transform JSON --> Display UI
   var index = 0;
