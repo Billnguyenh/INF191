@@ -412,7 +412,6 @@ function buildNotifications(jsonStr) {
 
   for (i = 0; i < jsonStr.length; i++) {
     var current = jsonStr[i];
-    current.timestamp = new Date(Date.parse(current.timestamp.replace('-', '/', 'g')));
     if (current.type === "Announcement") {
       notificationsArray[i] = new Announcement(current.sender, current.description, current.timestamp);
     }
