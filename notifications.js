@@ -17,10 +17,8 @@ Database Structure for System Activities JSON File
 
 */
 
-var notificationsData = JSON.parse(localStorage.getItem("notificationsData")).filter(function(data) {
-  data.timestamp = new Date(Date.parse(data.timestamp.replace('-', '/', 'g')));
-  return data;
-});
+var notificationsData = JSON.parse(localStorage.getItem("notificationsData"));
+
 
 // ----OBJECT LIBRARY -----
 
@@ -414,6 +412,7 @@ function buildNotifications(jsonStr) {
 
   for (i = 0; i < jsonStr.length; i++) {
     var current = jsonStr[i];
+    current.timestamp = new Date(Date.parse(current.timestamp.replace('-', '/', 'g')));
     if (current.type === "Announcement") {
       notificationsArray[i] = new Announcement(current.sender, current.description, current.timestamp);
     }
